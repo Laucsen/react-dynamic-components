@@ -1,14 +1,7 @@
 import styled from 'styled-components';
 
 import { ColumnProps } from './interfaces';
-
-// Compute the size of a column and return a CSS width line.
-const getWidthGrid = (value: number) => {
-  if (!value) return;
-
-  const width = (value / 12) * 100;
-  return `width: ${width}%;`;
-};
+import { getWidthGrid } from './utils';
 
 const Column = styled.div`
   float: left;
