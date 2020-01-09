@@ -1,3 +1,4 @@
+import Core from './Core';
 import { Container, Row, Column } from './components/Grid';
 
-export { Container, Row, Column };
+export { Core as default, Container, Row, Column };
