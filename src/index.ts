@@ -1,3 +1,3 @@
-import { TestComponent } from './components/TestComponent/TestComponent';
+import { Container, Row, Column } from './components/Grid';
 
-export { TestComponent };
+export { Container, Row, Column };
