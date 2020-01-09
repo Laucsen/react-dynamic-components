@@ -1,0 +1,55 @@
+{
+	"name": "main-container",
+	"type": "Container",
+	"version": 1,
+	"items": [
+		[
+			{
+				"data": {
+					"mobile": 6,
+					"tablet": 12,
+					"desktop": 5,
+					"component": {
+						"type": "Text",
+						"name": "text-a"
+					}
+				}
+			},
+			{
+				"data": {
+					"mobile": 6,
+					"tablet": 12,
+					"desktop": 5,
+					"component": {
+						"type": "Text",
+						"name": "text-b"
+					}
+				}
+			},
+			{
+				"data": {
+					"mobile": 6,
+					"tablet": 12,
+					"desktop": 5,
+					"component": {
+						"type": "Text",
+						"name": "text-c"
+					}
+				}
+			}
+		],
+		[
+			{
+				"data": {
+					"mobile": 12,
+					"tablet": 12,
+					"desktop": 12,
+					"component": {
+						"type": "Text",
+						"name": "text-d"
+					}
+				}
+			}
+		]
+	]
+}
