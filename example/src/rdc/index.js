@@ -94,21 +94,12 @@ var Core = function (_a) {
     if (!state) {
         return null;
     }
-    return store.build(state.structure, state.data);
+    return store.build(state.structure, state.data.data);
 };
 var Core$1 = connectController(Core);
 //# sourceMappingURL=Core.js.map
 
 //# sourceMappingURL=index.js.map
-
-var Container = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background: red;\n"], ["\n  background: red;\n"])));
-var RootContainer = function (_a) {
-    var structure = _a.structure, data = _a.data, store = _a.store;
-    return React.createElement(Container, null, store.build(structure.root, data));
-};
-var RootContainer$1 = register('RootContainer')(RootContainer);
-var templateObject_1;
-//# sourceMappingURL=RootContainer.js.map
 
 // Compute the size of a column and return a CSS width line.
 var getWidthGrid = function (value) {
@@ -117,7 +108,7 @@ var getWidthGrid = function (value) {
 };
 //# sourceMappingURL=utils.js.map
 
-var Column = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"], ["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"])), function (_a) {
+var Column = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"], ["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"])), function (_a) {
     var mobile = _a.mobile;
     return mobile && getWidthGrid(mobile);
 }, function (_a) {
@@ -127,22 +118,50 @@ var Column = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTempla
     var desktop = _a.desktop;
     return desktop && getWidthGrid(desktop);
 });
+var templateObject_1;
+//# sourceMappingURL=Column.js.map
+
+var Row = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
 var templateObject_1$1;
-
-var Container$1 = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
-var GridContainer = function (_a) {
-    var structure = _a.structure, data = _a.data, store = _a.store;
-    console.log(structure);
-    console.log(data);
-    console.log(store);
-    return React.createElement(Container$1, null, "AAA");
-};
-var Container$2 = register('Container')(GridContainer);
-var templateObject_1$2;
-
-var Row = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
-var templateObject_1$3;
 //# sourceMappingURL=Row.js.map
 
+var Container = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
+var GridContainer = function (_a) {
+    var structure = _a.structure, data = _a.data, store = _a.store;
+    var _b = useState({
+        name: structure.name,
+        type: structure.type,
+    });
+    return (React.createElement(Container, null, structure.items.map(function (row, ri) {
+        return (React.createElement(Row, { key: ri }, row.map(function (column, ci) {
+            var _a = column.data, mobile = _a.mobile, tablet = _a.tablet, desktop = _a.desktop, component = _a.component;
+            return (React.createElement(Column, { mobile: mobile, tablet: tablet, desktop: desktop, key: ci }, store.build(component, data)));
+        })));
+    })));
+};
+var Container$1 = register('Container')(GridContainer);
+var templateObject_1$2;
+//# sourceMappingURL=Container.js.map
+
+var Text = function (_a) {
+    var structure = _a.structure, data = _a.data;
+    var state = useState({
+        name: structure.name,
+        type: structure.type,
+    })[0];
+    var name = state.name;
+    return React.createElement(React.Fragment, null, data[name]);
+};
+var Text$1 = register('Text')(Text);
+
+var Container$2 = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject([""], [""])));
+var RootContainer = function (_a) {
+    var structure = _a.structure, data = _a.data, store = _a.store;
+    return React.createElement(Container$2, null, store.build(structure.root, data));
+};
+var RootContainer$1 = register('RootContainer')(RootContainer);
+var templateObject_1$3;
+//# sourceMappingURL=RootContainer.js.map
+
 export default Core$1;
-export { Column, Container$2 as Container, RootContainer$1 as RootContainer, Row, register };
+export { Column, Container$1 as Container, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };

@@ -6,8 +6,22 @@ export interface ColumnProps {
   desktop: number;
 }
 
+interface ColumnStructure extends ColumnProps {
+  component: object;
+}
+
+interface RowStructure {
+  data: ColumnStructure;
+}
+
+interface CotnainerStructure {
+  name: string;
+  type: string;
+  items: RowStructure[][];
+}
+
 export interface ContainerProps {
-  structure: object;
+  structure: CotnainerStructure;
   data: object;
   store: Store;
 }

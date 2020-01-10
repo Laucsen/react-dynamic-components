@@ -7,6 +7,14 @@ export interface State {
   components: Components;
 }
 
+export interface DataMap {
+  [index: string]: any;
+}
+
+export interface Data {
+  data: DataMap;
+}
+
 export interface Store {
   getState: () => State;
   registerComponent: (name: string, component: any) => void;
@@ -22,5 +30,5 @@ export interface CoreProps {
 
 export interface CoreBaseState {
   structure: object;
-  data: object;
+  data: Data;
 }

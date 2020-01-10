@@ -21,7 +21,7 @@ const Core: React.FC<CoreProps> = ({ structure, data, store }) => {
     return null;
   }
 
-  return store.build(state.structure, state.data);
+  return store.build(state.structure, state.data.data);
 };
 
 export default connectController(Core);
