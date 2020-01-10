@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 
+import { connectController } from './store';
 import { convertData } from '../utils';
 
 import { CoreProps, CoreBaseState } from './interfaces';
 
-const Core: React.FC<CoreProps> = ({ structure, data }) => {
-  const [state, setState] = useState<CoreBaseState>({});
+const Core: React.FC<CoreProps> = ({ structure, data, store }) => {
+  const [state, setState] = useState<CoreBaseState | null>(null);
 
   useEffect(() => {
     try {
@@ -16,9 +17,11 @@ const Core: React.FC<CoreProps> = ({ structure, data }) => {
     }
   }, [structure, data]);
 
-  console.log(state);
+  if (!state) {
+    return null;
+  }
 
-  return <div>AAA</div>;
+  return store.build(state.structure, state.data);
 };
 
-export default Core;
+export default connectController(Core);

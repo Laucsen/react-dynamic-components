@@ -4,8 +4,8 @@ export const convertData = (structure: string, data: string): CoreBaseState => {
   const parsedStructure = JSON.parse(structure);
   const parsedData = JSON.parse(data);
 
-  // Validate
-  console.log(parsedStructure);
+  // Validate structure.
+  // console.log(parsedStructure);
 
   return {
     structure: parsedStructure,

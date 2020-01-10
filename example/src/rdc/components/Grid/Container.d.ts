@@ -1,2 +1,3 @@
-declare const Container: import("styled-components").StyledComponent<"div", any, {}, never>;
-export default Container;
+/// <reference types="react" />
+declare const _default: (props: any) => JSX.Element;
+export default _default;
