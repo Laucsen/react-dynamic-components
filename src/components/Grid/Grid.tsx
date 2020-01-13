@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { ContainerProps } from './interfaces';
+import { GridProps } from './interfaces';
 
 import Row from './Row';
 import Column from './Column';
@@ -23,7 +23,7 @@ const Grid = styled.div`
   }
 `;
 
-const GridContainer: React.FC<ContainerProps> = ({ structure, data, store }) => {
+const GridContainer: React.FC<GridProps> = ({ structure, data, store }) => {
   const [] = useState({
     name: structure.name,
     type: structure.type,

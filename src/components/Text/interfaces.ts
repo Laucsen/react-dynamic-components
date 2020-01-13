@@ -1,4 +1,4 @@
-import { Store, DataMap } from '../..';
+import { Store, Data } from '../..';
 
 interface TextStructure {
   name: string;
@@ -7,6 +7,6 @@ interface TextStructure {
 
 export interface TextProps {
   structure: TextStructure;
-  data: DataMap;
+  data: Data;
   store: Store;
 }

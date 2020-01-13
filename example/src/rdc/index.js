@@ -56,6 +56,10 @@ var errorLineTemplate = {
         mobile: 6,
         tablet: 12,
         desktop: 12,
+        component: {
+            type: 'Container',
+            components: [],
+        },
     },
 };
 var errorTemplate = {
@@ -69,20 +73,35 @@ var errorTemplate = {
     },
 };
 var getErrorsStructureAndData = function (errors) {
-    var structure = errorTemplate;
     var conts = errors.map(function (error) {
+        var _a;
         var currentTemplate = errorLineTemplate;
-        currentTemplate.data.component = {
-            type: 'Text',
-            name: error.name,
-        };
+        (_a = currentTemplate.data.component.components).push.apply(_a, [
+            {
+                type: 'Text',
+                name: error.name,
+            },
+            {
+                type: 'Text',
+                name: error.name + "-component",
+            },
+            {
+                type: 'Text',
+                name: error.name + "-\u00A0schemaPath",
+            },
+        ]);
         return errorLineTemplate;
     });
+    var structure = errorTemplate;
     structure.root.items[0] = conts;
     var data = errors.reduce(function (acc, error) {
         acc[error.name] = error.message;
+        acc[error.name + "-component"] = error.component;
+        acc[error.name + "-\u00A0schemaPath"] = error.schemaPath;
         return acc;
     }, {});
+    console.log('---');
+    console.log(data);
     return {
         structure: structure,
         data: data,
@@ -259,6 +278,30 @@ var GridStructure = {
 var Grid$1 = register('Grid', GridStructure)(GridContainer);
 //# sourceMappingURL=index.js.map
 
+var ContainerStyled = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  display: flex;\n"], ["\n  display: flex;\n"])));
+var Container$1 = function (_a) {
+    var structure = _a.structure, data = _a.data, store = _a.store;
+    return (React.createElement(ContainerStyled, null, structure.components.map(function (component, index) {
+        return React.createElement(React.Fragment, { key: index }, store.build(component, data));
+    })));
+};
+var templateObject_1$4;
+//# sourceMappingURL=Container.js.map
+
+var ContainerStructure = {
+    properties: {
+        smaller: {
+            type: 'number',
+            maximum: { $data: '1/larger' },
+        },
+        larger: { type: 'number' },
+    },
+};
+//# sourceMappingURL=structure.js.map
+
+var Container$2 = register('Container', ContainerStructure)(Container$1);
+//# sourceMappingURL=index.js.map
+
 var Text = function (_a) {
     var structure = _a.structure, data = _a.data;
     var state = useState({
@@ -285,4 +328,4 @@ var Text$1 = register('Text', TextStructure)(Text);
 //# sourceMappingURL=index.js.map
 
 export default Core$1;
-export { Column, Grid$1 as Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };
+export { Column, Container$2 as Container, Grid$1 as Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };

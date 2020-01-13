@@ -5,11 +5,15 @@ interface ErrorComponentData {
     type: string;
     name: string;
 }
+interface ErrorContainer {
+    type: string;
+    components: ErrorComponentData[];
+}
 interface ErrorData {
     mobile: number;
     tablet: number;
     desktop: number;
-    component?: ErrorComponentData;
+    component: ErrorContainer;
 }
 interface ErrorLineTemplate {
     data: ErrorData;

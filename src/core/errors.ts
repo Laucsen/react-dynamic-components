@@ -25,11 +25,16 @@ interface ErrorComponentData {
   name: string;
 }
 
+interface ErrorContainer {
+  type: string;
+  components: ErrorComponentData[];
+}
+
 interface ErrorData {
   mobile: number;
   tablet: number;
   desktop: number;
-  component?: ErrorComponentData;
+  component: ErrorContainer;
 }
 
 interface ErrorLineTemplate {
@@ -54,6 +59,10 @@ const errorLineTemplate: ErrorLineTemplate = {
     mobile: 6,
     tablet: 12,
     desktop: 12,
+    component: {
+      type: 'Container',
+      components: [],
+    },
   },
 };
 
@@ -69,21 +78,39 @@ const errorTemplate: ErrorTemplate = {
 };
 
 export const getErrorsStructureAndData = (errors: StructureError[]) => {
-  const structure = errorTemplate;
   const conts = errors.map((error: StructureError) => {
     const currentTemplate = errorLineTemplate;
-    currentTemplate.data.component = {
-      type: 'Text',
-      name: error.name,
-    };
+    currentTemplate.data.component.components.push(
+      ...[
+        {
+          type: 'Text',
+          name: error.name,
+        },
+        {
+          type: 'Text',
+          name: `${error.name}-component`,
+        },
+        {
+          type: 'Text',
+          name: `${error.name}- schemaPath`,
+        },
+      ],
+    );
     return errorLineTemplate;
   });
+
+  const structure = errorTemplate;
   structure.root.items[0] = conts;
 
   const data = errors.reduce((acc: Data, error: StructureError): Data => {
     acc[error.name] = error.message;
+    acc[`${error.name}-component`] = error.component;
+    acc[`${error.name}- schemaPath`] = error.schemaPath;
     return acc;
   }, {});
+
+  console.log('---');
+  console.log(data);
 
   return {
     structure,

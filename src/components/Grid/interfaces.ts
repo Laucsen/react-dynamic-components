@@ -14,14 +14,14 @@ interface RowStructure {
   data: ColumnStructure;
 }
 
-interface CotnainerStructure {
+interface GeidStructure {
   name: string;
   type: string;
   items: RowStructure[][];
 }
 
-export interface ContainerProps {
-  structure: CotnainerStructure;
+export interface GridProps {
+  structure: GeidStructure;
   data: object;
   store: Store;
 }

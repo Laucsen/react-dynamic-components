@@ -15,6 +15,7 @@ export interface DataConfig {
     data: Data;
 }
 export interface StructureError {
+    name: string;
     component: string;
     message: string;
     schemaPath: string;
