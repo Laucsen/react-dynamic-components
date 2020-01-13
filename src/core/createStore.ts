@@ -8,11 +8,18 @@ const isRoot = (structure: any) => {
   return structure.type === undefined && structure.root !== undefined;
 };
 
-const getComponentNameFromStructure = (structure: any) => {
+const getComponentTypeFromStructure = (structure: any) => {
   if (isRoot(structure)) {
     return 'RootContainer';
   }
   return structure.type;
+};
+
+const getComponentNameFromStructure = (structure: any) => {
+  if (isRoot(structure)) {
+    return 'root';
+  }
+  return structure.name;
 };
 
 const createStore = (): Store => {
@@ -29,20 +36,20 @@ const createStore = (): Store => {
   };
 
   const build = (structure: object, data: object) => {
-    const name = getComponentNameFromStructure(structure);
-    const Element = state.components[name];
+    const type = getComponentTypeFromStructure(structure);
+    const Element = state.components[type];
     return createElement(Element, structure, data);
   };
 
   const validateStructure = (structure: any) => {
-    const componentName = getComponentNameFromStructure(structure);
-    const structureSchema = state.structures[componentName];
+    const componentType = getComponentTypeFromStructure(structure);
+    const structureSchema = state.structures[componentType];
 
     const ajv = new Ajv();
     const validate = ajv.compile(structureSchema);
     const result = validate(structure);
     if (!result) {
-      return formatStructureErrors(componentName, validate.errors);
+      return formatStructureErrors(componentType, getComponentNameFromStructure(structure), validate.errors);
     }
 
     // TODO: Cascading. How to validate other elements.

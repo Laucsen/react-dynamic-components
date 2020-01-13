@@ -38,28 +38,71 @@ var createElement = function (Element, structure, data) { return (React.createEl
 var createContextConsumer = function (StoreContext, Component, props) { return (React.createElement(StoreContext.Consumer, null, function (store) { return React.createElement(Component, __assign({}, props, { store: store })); })); };
 //# sourceMappingURL=wrappers.js.map
 
-var formatStructureErrors = function (componentName, errors) {
+var formatStructureErrors = function (componentType, componentName, errors) {
     if (!errors) {
         throw new Error('Invalid error Structure');
     }
     return errors.map(function (error) {
         return {
-            component: componentName,
-            message: error.keyword + " " + error.message,
+            component: componentType,
+            name: componentName,
+            message: "\"" + error.keyword + "\" " + error.message,
             schemaPath: error.schemaPath,
         };
     });
 };
-//# sourceMappingURL=errors.js.map
+var errorLineTemplate = {
+    data: {
+        mobile: 6,
+        tablet: 12,
+        desktop: 12,
+    },
+};
+var errorTemplate = {
+    version: 1,
+    name: 'error-structure',
+    title: 'Mage Sheet Structure',
+    root: {
+        name: 'error-grid',
+        type: 'Grid',
+        items: [[]],
+    },
+};
+var getErrorsStructureAndData = function (errors) {
+    var structure = errorTemplate;
+    var conts = errors.map(function (error) {
+        var currentTemplate = errorLineTemplate;
+        currentTemplate.data.component = {
+            type: 'Text',
+            name: error.name,
+        };
+        return errorLineTemplate;
+    });
+    structure.root.items[0] = conts;
+    var data = errors.reduce(function (acc, error) {
+        acc[error.name] = error.message;
+        return acc;
+    }, {});
+    return {
+        structure: structure,
+        data: data,
+    };
+};
 
 var isRoot = function (structure) {
     return structure.type === undefined && structure.root !== undefined;
 };
-var getComponentNameFromStructure = function (structure) {
+var getComponentTypeFromStructure = function (structure) {
     if (isRoot(structure)) {
         return 'RootContainer';
     }
     return structure.type;
+};
+var getComponentNameFromStructure = function (structure) {
+    if (isRoot(structure)) {
+        return 'root';
+    }
+    return structure.name;
 };
 var createStore = function () {
     var state = {
@@ -72,25 +115,24 @@ var createStore = function () {
         state.structures[name] = componentStructureSchema;
     };
     var build = function (structure, data) {
-        var name = getComponentNameFromStructure(structure);
-        var Element = state.components[name];
+        var type = getComponentTypeFromStructure(structure);
+        var Element = state.components[type];
         return createElement(Element, structure, data);
     };
     var validateStructure = function (structure) {
-        var componentName = getComponentNameFromStructure(structure);
-        var structureSchema = state.structures[componentName];
+        var componentType = getComponentTypeFromStructure(structure);
+        var structureSchema = state.structures[componentType];
         var ajv = new Ajv();
         var validate = ajv.compile(structureSchema);
         var result = validate(structure);
         if (!result) {
-            return formatStructureErrors(componentName, validate.errors);
+            return formatStructureErrors(componentType, getComponentNameFromStructure(structure), validate.errors);
         }
         // TODO: Cascading. How to validate other elements.
         return [];
     };
     return { getState: getState, registerComponent: registerComponent, build: build, validateStructure: validateStructure };
 };
-//# sourceMappingURL=createStore.js.map
 
 var globalStore = createStore();
 var StoreContext = React.createContext(globalStore);
@@ -108,6 +150,7 @@ var register = function (componentName, componentStructureSchema) {
 var Core = function (_a) {
     var structure = _a.structure, data = _a.data, store = _a.store;
     var _b = useState(null), state = _b[0], setState = _b[1];
+    var _c = useState(null), errors = _c[0], setErrors = _c[1];
     useEffect(function () {
         try {
             var validaData = {
@@ -116,14 +159,23 @@ var Core = function (_a) {
             };
             // - HOW TO VALIDATE?
             var result = store.validateStructure(validaData.structure);
-            console.log(result);
-            setState(validaData);
+            if (result.length !== 0) {
+                setErrors(result);
+            }
+            else {
+                setState(validaData);
+            }
         }
         catch (err) {
             console.log('Error: ');
             console.log(err);
         }
     }, [structure, data]);
+    if (errors) {
+        console.log(errors);
+        var errorsDef = getErrorsStructureAndData(errors);
+        return store.build(errorsDef.structure, errorsDef.data);
+    }
     if (!state) {
         return null;
     }
@@ -131,7 +183,6 @@ var Core = function (_a) {
     return store.build(state.structure, state.data.data);
 };
 var Core$1 = connectController(Core);
-//# sourceMappingURL=Core.js.map
 
 //# sourceMappingURL=index.js.map
 
@@ -151,6 +202,7 @@ var RootStructure = {
 //# sourceMappingURL=structure.js.map
 
 var RootContainer$1 = register('RootContainer', RootStructure)(RootContainer);
+//# sourceMappingURL=index.js.map
 
 // Compute the size of a column and return a CSS width line.
 var getWidthGrid = function (value) {
@@ -176,14 +228,14 @@ var Row = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateO
 var templateObject_1$2;
 //# sourceMappingURL=Row.js.map
 
-var Container$1 = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
+var Grid = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
 var GridContainer = function (_a) {
     var structure = _a.structure, data = _a.data, store = _a.store;
     var _b = useState({
         name: structure.name,
         type: structure.type,
     });
-    return (React.createElement(Container$1, null, structure.items.map(function (row, ri) {
+    return (React.createElement(Grid, null, structure.items.map(function (row, ri) {
         return (React.createElement(Row, { key: ri }, row.map(function (column, ci) {
             var _a = column.data, mobile = _a.mobile, tablet = _a.tablet, desktop = _a.desktop, component = _a.component;
             return (React.createElement(Column, { mobile: mobile, tablet: tablet, desktop: desktop, key: ci }, store.build(component, data)));
@@ -204,7 +256,8 @@ var GridStructure = {
 };
 //# sourceMappingURL=structure.js.map
 
-var Grid = register('Grid', GridStructure)(GridContainer);
+var Grid$1 = register('Grid', GridStructure)(GridContainer);
+//# sourceMappingURL=index.js.map
 
 var Text = function (_a) {
     var structure = _a.structure, data = _a.data;
@@ -229,6 +282,7 @@ var TextStructure = {
 //# sourceMappingURL=structure.js.map
 
 var Text$1 = register('Text', TextStructure)(Text);
+//# sourceMappingURL=index.js.map
 
 export default Core$1;
-export { Column, Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };
+export { Column, Grid$1 as Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };
