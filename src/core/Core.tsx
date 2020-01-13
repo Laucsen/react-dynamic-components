@@ -14,7 +14,9 @@ const Core: React.FC<CoreProps> = ({ structure, data, store }) => {
         data: JSON.parse(data),
       };
 
-      // -
+      // - HOW TO VALIDATE?
+      const result = store.validateStructure(validaData.structure);
+      console.log(result);
 
       setState(validaData);
     } catch (err) {

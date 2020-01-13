@@ -1,2 +1,2 @@
-import RootContainer from './RootContainer';
-export { RootContainer };
+/// <reference types="react" />
+export declare const RootContainer: (props: any) => JSX.Element;

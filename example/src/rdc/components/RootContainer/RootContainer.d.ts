@@ -1,3 +1,4 @@
-/// <reference types="react" />
-declare const _default: (props: any) => JSX.Element;
-export default _default;
+import React from 'react';
+import { RootContainerProps } from './interfaces';
+declare const RootContainer: React.FC<RootContainerProps>;
+export default RootContainer;

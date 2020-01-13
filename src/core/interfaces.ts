@@ -3,8 +3,13 @@ interface Components {
   [index: string]: any;
 }
 
+interface Structures {
+  [index: string]: any;
+}
+
 export interface State {
   components: Components;
+  structures: Structures;
 }
 
 export interface Data {
@@ -15,10 +20,17 @@ export interface DataConfig {
   data: Data;
 }
 
+export interface StructureError {
+  component: string;
+  message: string;
+  schemaPath: string;
+}
+
 export interface Store {
   getState: () => State;
-  registerComponent: (name: string, component: any) => void;
+  registerComponent: (name: string, component: any, structure: any) => void;
   build: (structure: object, data: object) => any;
+  validateStructure: (structur: any) => StructureError[];
 }
 
 // Core Component related

@@ -1,8 +1,12 @@
 interface Components {
     [index: string]: any;
 }
+interface Structures {
+    [index: string]: any;
+}
 export interface State {
     components: Components;
+    structures: Structures;
 }
 export interface Data {
     [index: string]: any;
@@ -12,8 +16,9 @@ export interface DataConfig {
 }
 export interface Store {
     getState: () => State;
-    registerComponent: (name: string, component: any) => void;
+    registerComponent: (name: string, component: any, structure: any) => void;
     build: (structure: object, data: object) => any;
+    validateStructure: (structur: any) => any[];
 }
 export interface CoreProps {
     structure: string;

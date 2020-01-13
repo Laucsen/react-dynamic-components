@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 
-import { register } from '../../';
-
 import { ContainerProps } from './interfaces';
 
 import Row from './Row';
@@ -50,4 +48,4 @@ const GridContainer: React.FC<ContainerProps> = ({ structure, data, store }) => 
   );
 };
 
-export default register('Container')(GridContainer);
+export default GridContainer;
