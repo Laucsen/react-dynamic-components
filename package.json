@@ -65,5 +65,8 @@
 	},
 	"files": [
 		"dist"
-	]
+	],
+	"dependencies": {
+		"ajv": "^6.10.2"
+	}
 }

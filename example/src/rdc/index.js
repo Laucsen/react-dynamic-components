@@ -65,48 +65,37 @@ var register = function (componentName) { return function (Component) {
     globalStore.registerComponent(componentName, consumerBuilder);
     return consumerBuilder;
 }; };
-//# sourceMappingURL=store.js.map
-
-var convertData = function (structure, data) {
-    var parsedStructure = JSON.parse(structure);
-    var parsedData = JSON.parse(data);
-    // Validate structure.
-    // console.log(parsedStructure);
-    return {
-        structure: parsedStructure,
-        data: parsedData,
-    };
-};
-//# sourceMappingURL=data.js.map
 
 var Core = function (_a) {
     var structure = _a.structure, data = _a.data, store = _a.store;
     var _b = useState(null), state = _b[0], setState = _b[1];
     useEffect(function () {
         try {
-            var validaData = convertData(structure, data);
+            var validaData = {
+                structure: JSON.parse(structure),
+                data: JSON.parse(data),
+            };
+            // -
             setState(validaData);
         }
         catch (err) {
+            console.log('Error: ');
             console.log(err);
         }
     }, [structure, data]);
     if (!state) {
         return null;
     }
+    console.log(state.structure);
     return store.build(state.structure, state.data.data);
 };
 var Core$1 = connectController(Core);
-//# sourceMappingURL=Core.js.map
-
-//# sourceMappingURL=index.js.map
 
 // Compute the size of a column and return a CSS width line.
 var getWidthGrid = function (value) {
     var width = (value / 12) * 100;
     return "width: " + width + "%;";
 };
-//# sourceMappingURL=utils.js.map
 
 var Column = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"], ["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"])), function (_a) {
     var mobile = _a.mobile;
@@ -119,11 +108,9 @@ var Column = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateOb
     return desktop && getWidthGrid(desktop);
 });
 var templateObject_1;
-//# sourceMappingURL=Column.js.map
 
 var Row = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
 var templateObject_1$1;
-//# sourceMappingURL=Row.js.map
 
 var Container = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
 var GridContainer = function (_a) {
@@ -141,7 +128,6 @@ var GridContainer = function (_a) {
 };
 var Container$1 = register('Container')(GridContainer);
 var templateObject_1$2;
-//# sourceMappingURL=Container.js.map
 
 var Text = function (_a) {
     var structure = _a.structure, data = _a.data;
@@ -161,7 +147,6 @@ var RootContainer = function (_a) {
 };
 var RootContainer$1 = register('RootContainer')(RootContainer);
 var templateObject_1$3;
-//# sourceMappingURL=RootContainer.js.map
 
 export default Core$1;
 export { Column, Container$1 as Container, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };

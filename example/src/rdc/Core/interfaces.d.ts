@@ -4,6 +4,12 @@ interface Components {
 export interface State {
     components: Components;
 }
+export interface Data {
+    [index: string]: any;
+}
+export interface DataConfig {
+    data: Data;
+}
 export interface Store {
     getState: () => State;
     registerComponent: (name: string, component: any) => void;
@@ -16,6 +22,6 @@ export interface CoreProps {
 }
 export interface CoreBaseState {
     structure: object;
-    data: object;
+    data: DataConfig;
 }
 export {};

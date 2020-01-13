@@ -7,12 +7,12 @@ export interface State {
   components: Components;
 }
 
-export interface DataMap {
+export interface Data {
   [index: string]: any;
 }
 
-export interface Data {
-  data: DataMap;
+export interface DataConfig {
+  data: Data;
 }
 
 export interface Store {
@@ -30,5 +30,5 @@ export interface CoreProps {
 
 export interface CoreBaseState {
   structure: object;
-  data: Data;
+  data: DataConfig;
 }

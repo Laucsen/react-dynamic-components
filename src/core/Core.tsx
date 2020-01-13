@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
 import { connectController } from './store';
-import { convertData } from '../utils';
 
 import { CoreProps, CoreBaseState } from './interfaces';
 
@@ -10,9 +9,16 @@ const Core: React.FC<CoreProps> = ({ structure, data, store }) => {
 
   useEffect(() => {
     try {
-      const validaData: CoreBaseState = convertData(structure, data);
+      const validaData: CoreBaseState = {
+        structure: JSON.parse(structure),
+        data: JSON.parse(data),
+      };
+
+      // -
+
       setState(validaData);
     } catch (err) {
+      console.log('Error: ');
       console.log(err);
     }
   }, [structure, data]);
@@ -20,6 +26,8 @@ const Core: React.FC<CoreProps> = ({ structure, data, store }) => {
   if (!state) {
     return null;
   }
+
+  console.log(state.structure);
 
   return store.build(state.structure, state.data.data);
 };

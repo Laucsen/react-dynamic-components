@@ -1,1 +1,0 @@
-export { convertData } from './data';
