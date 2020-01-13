@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 
 import { TextProps } from './interfaces';
+
+const TextContainer = styled.div`
+  padding: 8px;
+`;
 
 const Text: React.FC<TextProps> = ({ structure, data }) => {
   const [state] = useState({
@@ -9,7 +14,7 @@ const Text: React.FC<TextProps> = ({ structure, data }) => {
   });
 
   const name = state.name;
-  return <React.Fragment>{data[name]}</React.Fragment>;
+  return <TextContainer>{data[name]}</TextContainer>;
 };
 
 export default Text;

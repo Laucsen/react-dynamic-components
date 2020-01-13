@@ -107,6 +107,7 @@ var getErrorsStructureAndData = function (errors) {
         data: data,
     };
 };
+//# sourceMappingURL=errors.js.map
 
 var isRoot = function (structure) {
     return structure.type === undefined && structure.root !== undefined;
@@ -152,6 +153,7 @@ var createStore = function () {
     };
     return { getState: getState, registerComponent: registerComponent, build: build, validateStructure: validateStructure };
 };
+//# sourceMappingURL=createStore.js.map
 
 var globalStore = createStore();
 var StoreContext = React.createContext(globalStore);
@@ -202,6 +204,7 @@ var Core = function (_a) {
     return store.build(state.structure, state.data.data);
 };
 var Core$1 = connectController(Core);
+//# sourceMappingURL=Core.js.map
 
 //# sourceMappingURL=index.js.map
 
@@ -215,13 +218,16 @@ var templateObject_1;
 
 var RootStructure = {
     properties: {
-        version: { type: 'string' },
+        version: { type: 'number' },
+        name: { type: 'string' },
+        title: { type: 'string' },
+        root: { tyoe: 'object' },
     },
+    required: ['version', 'name', 'title', 'root'],
 };
 //# sourceMappingURL=structure.js.map
 
 var RootContainer$1 = register('RootContainer', RootStructure)(RootContainer);
-//# sourceMappingURL=index.js.map
 
 // Compute the size of a column and return a CSS width line.
 var getWidthGrid = function (value) {
@@ -278,7 +284,7 @@ var GridStructure = {
 var Grid$1 = register('Grid', GridStructure)(GridContainer);
 //# sourceMappingURL=index.js.map
 
-var ContainerStyled = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  display: flex;\n"], ["\n  display: flex;\n"])));
+var ContainerStyled = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  display: flex;\n\n  padding: 8px;\n"], ["\n  display: flex;\n\n  padding: 8px;\n"])));
 var Container$1 = function (_a) {
     var structure = _a.structure, data = _a.data, store = _a.store;
     return (React.createElement(ContainerStyled, null, structure.components.map(function (component, index) {
@@ -302,6 +308,7 @@ var ContainerStructure = {
 var Container$2 = register('Container', ContainerStructure)(Container$1);
 //# sourceMappingURL=index.js.map
 
+var TextContainer = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  padding: 8px;\n"], ["\n  padding: 8px;\n"])));
 var Text = function (_a) {
     var structure = _a.structure, data = _a.data;
     var state = useState({
@@ -309,8 +316,9 @@ var Text = function (_a) {
         type: structure.type,
     })[0];
     var name = state.name;
-    return React.createElement(React.Fragment, null, data[name]);
+    return React.createElement(TextContainer, null, data[name]);
 };
+var templateObject_1$5;
 //# sourceMappingURL=Text.js.map
 
 var TextStructure = {
