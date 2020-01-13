@@ -2,16 +2,16 @@ import * as React from 'react';
 import styled from 'styled-components';
 import { mount } from 'enzyme';
 
-import { Container, Row, Column } from '.';
+import { Grid, Row, Column } from '.';
 
 const SimpleText = styled.div`
   color: blue;
 `;
 
-describe('<Container />', () => {
+describe('<Grid />', () => {
   it('renders a Container with sub elements', () => {
     const Wrapper = mount(
-      <Container>
+      <Grid>
         <Row>
           <Column mobile={6} tablet={12} desktop={5}>
             <SimpleText>mobile 6 / tablet 12 / desktop 5</SimpleText>
@@ -23,7 +23,7 @@ describe('<Container />', () => {
             <SimpleText>mobile 12 / tablet 6 / desktop 2</SimpleText>
           </Column>
         </Row>
-      </Container>,
+      </Grid>,
     );
 
     expect(Wrapper.find(Column)).toHaveLength(3);

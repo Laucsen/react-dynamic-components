@@ -14,11 +14,16 @@ export interface Data {
 export interface DataConfig {
     data: Data;
 }
+export interface StructureError {
+    component: string;
+    message: string;
+    schemaPath: string;
+}
 export interface Store {
     getState: () => State;
     registerComponent: (name: string, component: any, structure: any) => void;
     build: (structure: object, data: object) => any;
-    validateStructure: (structur: any) => any[];
+    validateStructure: (structur: any) => StructureError[];
 }
 export interface CoreProps {
     structure: string;

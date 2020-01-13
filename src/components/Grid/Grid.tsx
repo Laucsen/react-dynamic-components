@@ -6,7 +6,7 @@ import { ContainerProps } from './interfaces';
 import Row from './Row';
 import Column from './Column';
 
-const Container = styled.div`
+const Grid = styled.div`
   max-width: 1360px;
   padding-right: 15px;
   padding-left: 15px;
@@ -29,7 +29,7 @@ const GridContainer: React.FC<ContainerProps> = ({ structure, data, store }) => 
     type: structure.type,
   });
   return (
-    <Container>
+    <Grid>
       {structure.items.map((row, ri) => {
         return (
           <Row key={ri}>
@@ -44,7 +44,7 @@ const GridContainer: React.FC<ContainerProps> = ({ structure, data, store }) => 
           </Row>
         );
       })}
-    </Container>
+    </Grid>
   );
 };
 

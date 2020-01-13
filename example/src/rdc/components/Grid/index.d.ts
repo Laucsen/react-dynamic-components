@@ -1,4 +1,5 @@
+/// <reference types="react" />
 import Column from './Column';
-import Container from './Container';
 import Row from './Row';
-export { Container, Row, Column };
+declare const Grid: (props: any) => JSX.Element;
+export { Grid, Row, Column };

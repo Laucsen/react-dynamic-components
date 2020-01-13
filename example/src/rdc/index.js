@@ -79,24 +79,18 @@ var createStore = function () {
     var validateStructure = function (structure) {
         var componentName = getComponentNameFromStructure(structure);
         var structureSchema = state.structures[componentName];
-        console.log('---');
-        console.log(componentName);
-        console.log(structure);
-        console.log(structureSchema);
-        console.log('...');
         var ajv = new Ajv();
         var validate = ajv.compile(structureSchema);
         var result = validate(structure);
         if (!result) {
             return formatStructureErrors(componentName, validate.errors);
         }
-        console.log(result);
-        console.log('...');
         // TODO: Cascading. How to validate other elements.
         return [];
     };
     return { getState: getState, registerComponent: registerComponent, build: build, validateStructure: validateStructure };
 };
+//# sourceMappingURL=createStore.js.map
 
 var globalStore = createStore();
 var StoreContext = React.createContext(globalStore);
@@ -109,6 +103,7 @@ var register = function (componentName, componentStructureSchema) {
         return consumerBuilder;
     };
 };
+//# sourceMappingURL=store.js.map
 
 var Core = function (_a) {
     var structure = _a.structure, data = _a.data, store = _a.store;
@@ -156,7 +151,6 @@ var RootStructure = {
 //# sourceMappingURL=structure.js.map
 
 var RootContainer$1 = register('RootContainer', RootStructure)(RootContainer);
-//# sourceMappingURL=index.js.map
 
 // Compute the size of a column and return a CSS width line.
 var getWidthGrid = function (value) {
@@ -197,9 +191,9 @@ var GridContainer = function (_a) {
     })));
 };
 var templateObject_1$3;
-//# sourceMappingURL=Container.js.map
+//# sourceMappingURL=Grid.js.map
 
-var ContainerStructure = {
+var GridStructure = {
     properties: {
         smaller: {
             type: 'number',
@@ -210,8 +204,7 @@ var ContainerStructure = {
 };
 //# sourceMappingURL=structure.js.map
 
-var Container$2 = register('Container', ContainerStructure)(GridContainer);
-//# sourceMappingURL=index.js.map
+var Grid = register('Grid', GridStructure)(GridContainer);
 
 var Text = function (_a) {
     var structure = _a.structure, data = _a.data;
@@ -236,7 +229,6 @@ var TextStructure = {
 //# sourceMappingURL=structure.js.map
 
 var Text$1 = register('Text', TextStructure)(Text);
-//# sourceMappingURL=index.js.map
 
 export default Core$1;
-export { Column, Container$2 as Container, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };
+export { Column, Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };

@@ -38,20 +38,12 @@ const createStore = (): Store => {
     const componentName = getComponentNameFromStructure(structure);
     const structureSchema = state.structures[componentName];
 
-    console.log('---');
-    console.log(componentName);
-    console.log(structure);
-    console.log(structureSchema);
-    console.log('...');
-
     const ajv = new Ajv();
     const validate = ajv.compile(structureSchema);
     const result = validate(structure);
     if (!result) {
       return formatStructureErrors(componentName, validate.errors);
     }
-    console.log(result);
-    console.log('...');
 
     // TODO: Cascading. How to validate other elements.
 

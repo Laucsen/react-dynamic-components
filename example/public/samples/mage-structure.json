@@ -1,59 +1,59 @@
 {
-  "version": 1,
-  "name": "mage-structure",
-  "title": "Mage Sheet Structure",
-  "root": {
-    "name": "main-container",
-    "type": "Container",
-    "items": [
-      [
-        {
-          "data": {
-            "mobile": 6,
-            "tablet": 12,
-            "desktop": 5,
-            "component": {
-              "type": "Text",
-              "name": "text-a"
-            }
-          }
-        },
-        {
-          "data": {
-            "mobile": 6,
-            "tablet": 12,
-            "desktop": 5,
-            "component": {
-              "type": "Text",
-              "name": "text-b"
-            }
-          }
-        },
-        {
-          "data": {
-            "mobile": 6,
-            "tablet": 12,
-            "desktop": 2,
-            "component": {
-              "type": "Text",
-              "name": "text-c"
-            }
-          }
-        }
-      ],
-      [
-        {
-          "data": {
-            "mobile": 12,
-            "tablet": 12,
-            "desktop": 12,
-            "component": {
-              "type": "Text",
-              "name": "text-d"
-            }
-          }
-        }
-      ]
-    ]
-  }
+	"version": 1,
+	"name": "mage-structure",
+	"title": "Mage Sheet Structure",
+	"root": {
+		"name": "main-grid",
+		"type": "Grid",
+		"items": [
+			[
+				{
+					"data": {
+						"mobile": 6,
+						"tablet": 12,
+						"desktop": 5,
+						"component": {
+							"type": "Text",
+							"name": "text-a"
+						}
+					}
+				},
+				{
+					"data": {
+						"mobile": 6,
+						"tablet": 12,
+						"desktop": 5,
+						"component": {
+							"type": "Text",
+							"name": "text-b"
+						}
+					}
+				},
+				{
+					"data": {
+						"mobile": 6,
+						"tablet": 12,
+						"desktop": 2,
+						"component": {
+							"type": "Text",
+							"name": "text-c"
+						}
+					}
+				}
+			],
+			[
+				{
+					"data": {
+						"mobile": 12,
+						"tablet": 12,
+						"desktop": 12,
+						"component": {
+							"type": "Text",
+							"name": "text-d"
+						}
+					}
+				}
+			]
+		]
+	}
 }
