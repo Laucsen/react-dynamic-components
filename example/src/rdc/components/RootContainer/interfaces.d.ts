@@ -1,6 +1,7 @@
 import { Store } from '../..';
+import { StrctureBase } from '../../Core/interfaces';
 export interface RootContainerStructure {
-    root: object;
+    root: StrctureBase;
 }
 export interface RootContainerProps {
     structure: RootContainerStructure;

@@ -1,10 +1,11 @@
+import { register } from '../..';
+
 import Column from './Column';
 import Row from './Row';
 import GridSource from './Grid';
 import GridStructure from './structure';
+import childrens from './childrens';
 
-import { register } from '../..';
-
-const Grid = register('Grid', GridStructure)(GridSource);
+const Grid = register('Grid', GridStructure, null, childrens)(GridSource);
 
 export { Grid, Row, Column };

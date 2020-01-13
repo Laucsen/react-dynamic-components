@@ -1,9 +1,29 @@
 export default {
   properties: {
-    smaller: {
-      type: 'number',
-      maximum: { $data: '1/larger' },
+    type: { type: 'string' },
+    name: { type: 'string' },
+    items: {
+      type: 'array',
+      items: {
+        type: 'array',
+        items: {
+          type: 'object',
+          properties: {
+            data: {
+              type: 'object',
+              properties: {
+                mobile: { type: 'number' },
+                tablet: { type: 'number' },
+                desktop: { type: 'number' },
+                component: { type: 'object' },
+              },
+              required: ['mobile', 'tablet', 'desktop', 'component'],
+            },
+          },
+          required: ['data'],
+        },
+      },
     },
-    larger: { type: 'number' },
   },
+  required: ['type', 'name', 'items'],
 };

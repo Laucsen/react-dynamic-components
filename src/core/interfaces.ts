@@ -1,15 +1,32 @@
 // State related
-interface Components {
+interface ComponentsIndex {
   [index: string]: any;
 }
 
-interface Structures {
+interface StructuresIndex {
   [index: string]: any;
+}
+
+interface DataSchemaIndex {
+  [index: string]: any;
+}
+
+export interface StrctureBase {
+  name: string;
+  type: string;
+}
+
+export type GetChildren = (structure: any) => StrctureBase[] | null;
+
+interface GetChildrenIndex {
+  [index: string]: GetChildren;
 }
 
 export interface State {
-  components: Components;
-  structures: Structures;
+  components: ComponentsIndex;
+  structures: StructuresIndex;
+  dataSchema: DataSchemaIndex;
+  childrens: GetChildrenIndex;
 }
 
 export interface Data {
@@ -29,7 +46,13 @@ export interface StructureError {
 
 export interface Store {
   getState: () => State;
-  registerComponent: (name: string, component: any, structure: any) => void;
+  registerComponent: (
+    name: string,
+    component: any,
+    structure: any,
+    componentDataSchema: any | null,
+    compoentChildrens: GetChildren,
+  ) => void;
   build: (structure: object, data: object) => any;
   validateStructure: (structur: any) => StructureError[];
 }

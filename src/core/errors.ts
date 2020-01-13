@@ -14,7 +14,7 @@ export const formatStructureErrors = (
     return {
       component: componentType,
       name: componentName,
-      message: `"${error.keyword}" ${error.message}`,
+      message: `"${error.dataPath}" ${error.message}`,
       schemaPath: error.schemaPath,
     };
   });
@@ -108,9 +108,6 @@ export const getErrorsStructureAndData = (errors: StructureError[]) => {
     acc[`${error.name}- schemaPath`] = error.schemaPath;
     return acc;
   }, {});
-
-  console.log('---');
-  console.log(data);
 
   return {
     structure,

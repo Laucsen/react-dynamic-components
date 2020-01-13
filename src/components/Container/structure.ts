@@ -1,9 +1,13 @@
 export default {
   properties: {
-    smaller: {
-      type: 'number',
-      maximum: { $data: '1/larger' },
+    type: { type: 'string' },
+    name: { type: 'string' },
+    components: {
+      type: 'array',
+      items: {
+        type: 'object',
+      },
     },
-    larger: { type: 'number' },
   },
+  required: ['type', 'components'],
 };

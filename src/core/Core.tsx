@@ -30,7 +30,6 @@ const Core: React.FC<CoreProps> = ({ structure, data, store }) => {
   }, [structure, data]);
 
   if (errors) {
-    console.log(errors);
     const errorsDef = getErrorsStructureAndData(errors);
     return store.build(errorsDef.structure, errorsDef.data);
   }
@@ -39,7 +38,7 @@ const Core: React.FC<CoreProps> = ({ structure, data, store }) => {
     return null;
   }
 
-  console.log(state.structure);
+  // console.log(state.structure);
 
   return store.build(state.structure, state.data.data);
 };

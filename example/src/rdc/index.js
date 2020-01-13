@@ -46,7 +46,7 @@ var formatStructureErrors = function (componentType, componentName, errors) {
         return {
             component: componentType,
             name: componentName,
-            message: "\"" + error.keyword + "\" " + error.message,
+            message: "\"" + error.dataPath + "\" " + error.message,
             schemaPath: error.schemaPath,
         };
     });
@@ -100,8 +100,6 @@ var getErrorsStructureAndData = function (errors) {
         acc[error.name + "-\u00A0schemaPath"] = error.schemaPath;
         return acc;
     }, {});
-    console.log('---');
-    console.log(data);
     return {
         structure: structure,
         data: data,
@@ -128,11 +126,17 @@ var createStore = function () {
     var state = {
         components: {},
         structures: {},
+        dataSchema: {},
+        childrens: {},
     };
     var getState = function () { return Object.freeze(__assign({}, state)); };
-    var registerComponent = function (name, component, componentStructureSchema) {
+    var registerComponent = function (name, component, componentStructureSchema, componentDataSchema, compoentChildrens) {
+        if (componentDataSchema === void 0) { componentDataSchema = null; }
+        if (compoentChildrens === void 0) { compoentChildrens = function () { return null; }; }
         state.components[name] = component;
         state.structures[name] = componentStructureSchema;
+        state.dataSchema[name] = componentDataSchema;
+        state.childrens[name] = compoentChildrens;
     };
     var build = function (structure, data) {
         var type = getComponentTypeFromStructure(structure);
@@ -140,15 +144,35 @@ var createStore = function () {
         return createElement(Element, structure, data);
     };
     var validateStructure = function (structure) {
-        var componentType = getComponentTypeFromStructure(structure);
-        var structureSchema = state.structures[componentType];
         var ajv = new Ajv();
-        var validate = ajv.compile(structureSchema);
-        var result = validate(structure);
-        if (!result) {
-            return formatStructureErrors(componentType, getComponentNameFromStructure(structure), validate.errors);
+        var componentType = getComponentTypeFromStructure(structure);
+        var toAnalyze = [
+            {
+                currentType: componentType,
+                currentStructure: structure,
+            },
+        ];
+        while (toAnalyze.length !== 0) {
+            var currentItem = toAnalyze[0];
+            toAnalyze.shift();
+            var structureSchema = state.structures[currentItem.currentType];
+            var validate = ajv.compile(structureSchema);
+            var result = validate(currentItem.currentStructure);
+            if (!result) {
+                return formatStructureErrors(currentItem.currentType, getComponentNameFromStructure(currentItem.currentStructure), validate.errors);
+            }
+            var getChildrens = state.childrens[currentItem.currentType];
+            var childrens = getChildrens(currentItem.currentStructure);
+            if (childrens) {
+                var futureAnalysis = childrens.map(function (child) {
+                    return {
+                        currentType: child.type,
+                        currentStructure: child,
+                    };
+                });
+                toAnalyze.push.apply(toAnalyze, futureAnalysis);
+            }
         }
-        // TODO: Cascading. How to validate other elements.
         return [];
     };
     return { getState: getState, registerComponent: registerComponent, build: build, validateStructure: validateStructure };
@@ -158,11 +182,13 @@ var createStore = function () {
 var globalStore = createStore();
 var StoreContext = React.createContext(globalStore);
 var connectController = function (Component) { return function (props) { return createContextConsumer(StoreContext, Component, props); }; };
-var register = function (componentName, componentStructureSchema) {
+var register = function (componentName, componentStructureSchema, componentDataSchema, compoentChildrens) {
     if (componentStructureSchema === void 0) { componentStructureSchema = {}; }
+    if (componentDataSchema === void 0) { componentDataSchema = null; }
+    if (compoentChildrens === void 0) { compoentChildrens = function () { return null; }; }
     return function (Component) {
         var consumerBuilder = function (props) { return createContextConsumer(StoreContext, Component, props); };
-        globalStore.registerComponent(componentName, consumerBuilder, componentStructureSchema);
+        globalStore.registerComponent(componentName, consumerBuilder, componentStructureSchema, componentDataSchema, compoentChildrens);
         return consumerBuilder;
     };
 };
@@ -193,14 +219,13 @@ var Core = function (_a) {
         }
     }, [structure, data]);
     if (errors) {
-        console.log(errors);
         var errorsDef = getErrorsStructureAndData(errors);
         return store.build(errorsDef.structure, errorsDef.data);
     }
     if (!state) {
         return null;
     }
-    console.log(state.structure);
+    // console.log(state.structure);
     return store.build(state.structure, state.data.data);
 };
 var Core$1 = connectController(Core);
@@ -227,7 +252,13 @@ var RootStructure = {
 };
 //# sourceMappingURL=structure.js.map
 
-var RootContainer$1 = register('RootContainer', RootStructure)(RootContainer);
+var childrens = (function (structure) {
+    return [structure.root];
+});
+//# sourceMappingURL=childrens.js.map
+
+var RootContainer$1 = register('RootContainer', RootStructure, null, childrens)(RootContainer);
+//# sourceMappingURL=index.js.map
 
 // Compute the size of a column and return a CSS width line.
 var getWidthGrid = function (value) {
@@ -272,16 +303,49 @@ var templateObject_1$3;
 
 var GridStructure = {
     properties: {
-        smaller: {
-            type: 'number',
-            maximum: { $data: '1/larger' },
+        type: { type: 'string' },
+        name: { type: 'string' },
+        items: {
+            type: 'array',
+            items: {
+                type: 'array',
+                items: {
+                    type: 'object',
+                    properties: {
+                        data: {
+                            type: 'object',
+                            properties: {
+                                mobile: { type: 'number' },
+                                tablet: { type: 'number' },
+                                desktop: { type: 'number' },
+                                component: { type: 'object' },
+                            },
+                            required: ['mobile', 'tablet', 'desktop', 'component'],
+                        },
+                    },
+                    required: ['data'],
+                },
+            },
         },
-        larger: { type: 'number' },
     },
+    required: ['type', 'name', 'items'],
 };
 //# sourceMappingURL=structure.js.map
 
-var Grid$1 = register('Grid', GridStructure)(GridContainer);
+var childrens$1 = (function (structure) {
+    var mapped = structure.items
+        .reduce(function (acc, items) {
+        acc.push.apply(acc, items);
+        return acc;
+    }, [])
+        .map(function (items) {
+        return items.data.component;
+    });
+    return mapped;
+});
+//# sourceMappingURL=childrens.js.map
+
+var Grid$1 = register('Grid', GridStructure, null, childrens$1)(GridContainer);
 //# sourceMappingURL=index.js.map
 
 var ContainerStyled = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  display: flex;\n\n  padding: 8px;\n"], ["\n  display: flex;\n\n  padding: 8px;\n"])));
@@ -296,17 +360,19 @@ var templateObject_1$4;
 
 var ContainerStructure = {
     properties: {
-        smaller: {
-            type: 'number',
-            maximum: { $data: '1/larger' },
+        type: { type: 'string' },
+        name: { type: 'string' },
+        components: {
+            type: 'array',
+            items: {
+                type: 'object',
+            },
         },
-        larger: { type: 'number' },
     },
+    required: ['type', 'components'],
 };
-//# sourceMappingURL=structure.js.map
 
 var Container$2 = register('Container', ContainerStructure)(Container$1);
-//# sourceMappingURL=index.js.map
 
 var TextContainer = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  padding: 8px;\n"], ["\n  padding: 8px;\n"])));
 var Text = function (_a) {
@@ -323,12 +389,10 @@ var templateObject_1$5;
 
 var TextStructure = {
     properties: {
-        smaller: {
-            type: 'number',
-            maximum: { $data: '1/larger' },
-        },
-        larger: { type: 'number' },
+        type: { type: 'string' },
+        name: { type: 'string' },
     },
+    required: ['type', 'name'],
 };
 //# sourceMappingURL=structure.js.map
 

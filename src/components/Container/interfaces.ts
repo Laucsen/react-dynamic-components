@@ -1,9 +1,10 @@
 import { Store, Data } from '../..';
+import { StrctureBase } from '../../Core/interfaces';
 
 interface ContainerStrucutre {
   name?: string;
   type: string;
-  components: object[];
+  components: StrctureBase[];
 }
 
 export interface ContainerProps {

@@ -1,14 +1,12 @@
 declare const _default: {
     properties: {
-        smaller: {
+        type: {
             type: string;
-            maximum: {
-                $data: string;
-            };
         };
-        larger: {
+        name: {
             type: string;
         };
     };
+    required: string[];
 };
 export default _default;

@@ -1,14 +1,18 @@
 declare const _default: {
     properties: {
-        smaller: {
+        type: {
             type: string;
-            maximum: {
-                $data: string;
+        };
+        name: {
+            type: string;
+        };
+        components: {
+            type: string;
+            items: {
+                type: string;
             };
         };
-        larger: {
-            type: string;
-        };
     };
+    required: string[];
 };
 export default _default;
