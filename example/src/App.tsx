@@ -2,24 +2,24 @@ import React, { useEffect, useState } from 'react';
 
 import RDC from './rdc';
 
-const App = () => {
-  const [type] = useState('mage');
+import {} from './components/Sheets';
 
+const App = () => {
   const [structure, setStructure] = useState<null | string>(null);
   const [data, setData] = useState<null | string>(null);
 
   useEffect(() => {
-    fetch(`/samples/${type}-structure.json`)
+    fetch(`/samples/base-structure.json`)
       .then(res => res.text())
       .then(res => setStructure(res));
-  }, [type]);
+  }, []);
   useEffect(() => {
     if (structure) {
-      fetch(`/samples/${type}-data.json`)
+      fetch(`/samples/base-data.json`)
         .then(res => res.text())
         .then(res => setData(res));
     }
-  }, [type, structure]);
+  }, [structure]);
 
   if (!structure || !data) {
     return null;

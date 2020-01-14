@@ -1,0 +1,83 @@
+{
+	"version": 1,
+	"name": "base-structure",
+	"title": "React Dynamic Components",
+	"root": {
+		"name": "main-grid",
+		"type": "Grid",
+		"items": [
+			[
+				{
+					"data": {
+						"mobile": 6,
+						"tablet": 12,
+						"desktop": 12,
+						"component": {
+							"type": "Container",
+							"components": [
+								{
+									"type": "Text",
+									"name": "text-controll"
+								}
+							]
+						}
+					}
+				}
+			],
+			[
+				{
+					"data": {
+						"mobile": 6,
+						"tablet": 12,
+						"desktop": 12,
+						"component": {
+							"type": "Container",
+							"components": [
+								{
+									"type": "Sheets",
+									"name": "sheet-data"
+								}
+							]
+						}
+					}
+				}
+			],
+			[
+				{
+					"data": {
+						"mobile": 6,
+						"tablet": 12,
+						"desktop": 12,
+						"component": {
+							"type": "Container",
+							"components": [
+								{
+									"type": "Text",
+									"name": "text-structure"
+								}
+							]
+						}
+					}
+				}
+			],
+			[
+				{
+					"data": {
+						"mobile": 6,
+						"tablet": 12,
+						"desktop": 12,
+						"component": {
+							"type": "Container",
+							"components": [
+								{
+									"type": "Text",
+									"name": "text-data"
+								}
+							]
+						}
+					}
+				}
+			]
+		]
+	}
+}

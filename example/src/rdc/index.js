@@ -156,6 +156,15 @@ var createStore = function () {
             var currentItem = toAnalyze[0];
             toAnalyze.shift();
             var structureSchema = state.structures[currentItem.currentType];
+            if (!structureSchema) {
+                return [
+                    {
+                        name: getComponentNameFromStructure(currentItem.currentStructure),
+                        component: currentItem.currentType,
+                        message: 'Component not Registered',
+                    },
+                ];
+            }
             var validate = ajv.compile(structureSchema);
             var result = validate(currentItem.currentStructure);
             if (!result) {
@@ -177,7 +186,6 @@ var createStore = function () {
     };
     return { getState: getState, registerComponent: registerComponent, build: build, validateStructure: validateStructure };
 };
-//# sourceMappingURL=createStore.js.map
 
 var globalStore = createStore();
 var StoreContext = React.createContext(globalStore);
@@ -192,7 +200,6 @@ var register = function (componentName, componentStructureSchema, componentDataS
         return consumerBuilder;
     };
 };
-//# sourceMappingURL=store.js.map
 
 var Core = function (_a) {
     var structure = _a.structure, data = _a.data, store = _a.store;
@@ -225,7 +232,6 @@ var Core = function (_a) {
     if (!state) {
         return null;
     }
-    // console.log(state.structure);
     return store.build(state.structure, state.data.data);
 };
 var Core$1 = connectController(Core);
@@ -371,8 +377,15 @@ var ContainerStructure = {
     },
     required: ['type', 'components'],
 };
+//# sourceMappingURL=structure.js.map
 
-var Container$2 = register('Container', ContainerStructure)(Container$1);
+var childrens$2 = (function (structure) {
+    return structure.components;
+});
+//# sourceMappingURL=childrens.js.map
+
+var Container$2 = register('Container', ContainerStructure, null, childrens$2)(Container$1);
+//# sourceMappingURL=index.js.map
 
 var TextContainer = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  padding: 8px;\n"], ["\n  padding: 8px;\n"])));
 var Text = function (_a) {

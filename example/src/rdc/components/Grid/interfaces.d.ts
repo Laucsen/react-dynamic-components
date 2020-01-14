@@ -1,4 +1,4 @@
-import { Store } from '../..';
+import { Store, StrctureBase } from '../..';
 export interface ColumnProps {
     mobile: number;
     tablet: number;
@@ -19,5 +19,14 @@ export interface GridProps {
     structure: GeidStructure;
     data: object;
     store: Store;
+}
+export interface GridComponentStructure {
+    component: StrctureBase;
+}
+export interface GridColumnStructure {
+    data: GridComponentStructure;
+}
+export interface GridStructure {
+    items: GridColumnStructure[][];
 }
 export {};

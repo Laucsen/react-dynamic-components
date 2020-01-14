@@ -1,12 +1,4 @@
-import { StrctureBase } from '../../Core/interfaces';
-interface GridComponentStructure {
-    component: StrctureBase;
-}
-interface GridColumnStructure {
-    data: GridComponentStructure;
-}
-interface GridStructure {
-    items: GridColumnStructure[][];
-}
+import { StrctureBase } from '../..';
+import { GridStructure } from './interfaces';
 declare const _default: (structure: GridStructure) => StrctureBase[] | null;
 export default _default;

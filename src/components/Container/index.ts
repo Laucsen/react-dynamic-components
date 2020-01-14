@@ -1,8 +1,9 @@
-import ContainerSrc from './Container';
-import ContainerStructure from './structure';
-
 import { register } from '../..';
 
-const Container = register('Container', ContainerStructure)(ContainerSrc);
+import ContainerSrc from './Container';
+import ContainerStructure from './structure';
+import childrens from './childrens';
+
+const Container = register('Container', ContainerStructure, null, childrens)(ContainerSrc);
 
 export { Container };

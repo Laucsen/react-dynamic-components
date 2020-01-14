@@ -1,16 +1,6 @@
-import { StrctureBase } from '../../Core/interfaces';
+import { StrctureBase } from '../..';
 
-interface GridComponentStructure {
-  component: StrctureBase;
-}
-
-interface GridColumnStructure {
-  data: GridComponentStructure;
-}
-
-interface GridStructure {
-  items: GridColumnStructure[][];
-}
+import { GridStructure, GridColumnStructure } from './interfaces';
 
 export default (structure: GridStructure): StrctureBase[] | null => {
   const mapped = structure.items

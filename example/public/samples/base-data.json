@@ -1,0 +1,9 @@
+{
+	"version": 1,
+	"data": {
+		"sheet-data": "mage",
+		"text-structure": "Here we will JSON Structure",
+		"text-data": "Here we will JSON Data",
+		"text-controll": "Here we will add the controll buttons"
+	}
+}

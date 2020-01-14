@@ -38,8 +38,6 @@ const Core: React.FC<CoreProps> = ({ structure, data, store }) => {
     return null;
   }
 
-  // console.log(state.structure);
-
   return store.build(state.structure, state.data.data);
 };
 

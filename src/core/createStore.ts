@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 
-import { Store, State, GetChildren, StrctureBase } from './interfaces';
+import { Store, State, GetChildren, StrctureBase, StructureError } from './interfaces';
 import { createElement } from './wrappers';
 import { formatStructureErrors } from './errors';
 
@@ -56,7 +56,7 @@ const createStore = (): Store => {
     currentType: string;
   }
 
-  const validateStructure = (structure: any) => {
+  const validateStructure = (structure: any): StructureError[] => {
     const ajv = new Ajv();
 
     const componentType = getComponentTypeFromStructure(structure);
@@ -73,6 +73,15 @@ const createStore = (): Store => {
       toAnalyze.shift();
 
       const structureSchema = state.structures[currentItem.currentType];
+      if (!structureSchema) {
+        return [
+          {
+            name: getComponentNameFromStructure(currentItem.currentStructure),
+            component: currentItem.currentType,
+            message: 'Component not Registered',
+          },
+        ];
+      }
 
       const validate = ajv.compile(structureSchema);
       const result = validate(currentItem.currentStructure);
