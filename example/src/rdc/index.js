@@ -124,24 +124,29 @@ var getComponentNameFromStructure = function (structure) {
 };
 var createStore = function () {
     var state = {
+        data: {},
         components: {},
-        structures: {},
+        structuresSchemas: {},
         dataSchema: {},
         childrens: {},
     };
     var getState = function () { return Object.freeze(__assign({}, state)); };
+    var storeData = function (data) {
+        state.data = __assign(__assign({}, state.data), data.data);
+    };
     var registerComponent = function (name, component, componentStructureSchema, componentDataSchema, compoentChildrens) {
         if (componentDataSchema === void 0) { componentDataSchema = null; }
         if (compoentChildrens === void 0) { compoentChildrens = function () { return null; }; }
         state.components[name] = component;
-        state.structures[name] = componentStructureSchema;
+        state.structuresSchemas[name] = componentStructureSchema;
         state.dataSchema[name] = componentDataSchema;
         state.childrens[name] = compoentChildrens;
     };
-    var build = function (structure, data) {
+    var build = function (structure) {
         var type = getComponentTypeFromStructure(structure);
+        var currentData = state.data[structure.name];
         var Element = state.components[type];
-        return createElement(Element, structure, data);
+        return createElement(Element, structure, currentData);
     };
     var validateStructure = function (structure) {
         var ajv = new Ajv();
@@ -155,7 +160,7 @@ var createStore = function () {
         while (toAnalyze.length !== 0) {
             var currentItem = toAnalyze[0];
             toAnalyze.shift();
-            var structureSchema = state.structures[currentItem.currentType];
+            var structureSchema = state.structuresSchemas[currentItem.currentType];
             if (!structureSchema) {
                 return [
                     {
@@ -184,8 +189,9 @@ var createStore = function () {
         }
         return [];
     };
-    return { getState: getState, registerComponent: registerComponent, build: build, validateStructure: validateStructure };
+    return { getState: getState, registerComponent: registerComponent, build: build, validateStructure: validateStructure, storeData: storeData };
 };
+//# sourceMappingURL=createStore.js.map
 
 var globalStore = createStore();
 var StoreContext = React.createContext(globalStore);
@@ -200,39 +206,39 @@ var register = function (componentName, componentStructureSchema, componentDataS
         return consumerBuilder;
     };
 };
+//# sourceMappingURL=store.js.map
 
 var Core = function (_a) {
-    var structure = _a.structure, data = _a.data, store = _a.store;
-    var _b = useState(null), state = _b[0], setState = _b[1];
+    var structureStr = _a.structure, data = _a.data, store = _a.store;
+    var _b = useState(null), structure = _b[0], setStructure = _b[1];
     var _c = useState(null), errors = _c[0], setErrors = _c[1];
     useEffect(function () {
         try {
-            var validaData = {
-                structure: JSON.parse(structure),
-                data: JSON.parse(data),
-            };
-            // - HOW TO VALIDATE?
-            var result = store.validateStructure(validaData.structure);
+            var parsedData = JSON.parse(data);
+            var parsedStructure = JSON.parse(structureStr);
+            var result = store.validateStructure(parsedStructure);
             if (result.length !== 0) {
                 setErrors(result);
             }
             else {
-                setState(validaData);
+                setStructure(parsedStructure);
+                store.storeData(parsedData);
             }
         }
         catch (err) {
             console.log('Error: ');
             console.log(err);
         }
-    }, [structure, data]);
+    }, [structureStr, data, store]);
     if (errors) {
         var errorsDef = getErrorsStructureAndData(errors);
-        return store.build(errorsDef.structure, errorsDef.data);
+        store.storeData(errorsDef.data);
+        return store.build(errorsDef.structure);
     }
-    if (!state) {
+    if (!structure) {
         return null;
     }
-    return store.build(state.structure, state.data.data);
+    return store.build(structure);
 };
 var Core$1 = connectController(Core);
 //# sourceMappingURL=Core.js.map
@@ -241,8 +247,8 @@ var Core$1 = connectController(Core);
 
 var Container = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
 var RootContainer = function (_a) {
-    var structure = _a.structure, data = _a.data, store = _a.store;
-    return React.createElement(Container, null, store.build(structure.root, data));
+    var structure = _a.structure, store = _a.store;
+    return React.createElement(Container, null, store.build(structure.root));
 };
 var templateObject_1;
 //# sourceMappingURL=RootContainer.js.map
@@ -292,7 +298,7 @@ var templateObject_1$2;
 
 var Grid = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
 var GridContainer = function (_a) {
-    var structure = _a.structure, data = _a.data, store = _a.store;
+    var structure = _a.structure, store = _a.store;
     var _b = useState({
         name: structure.name,
         type: structure.type,
@@ -300,7 +306,7 @@ var GridContainer = function (_a) {
     return (React.createElement(Grid, null, structure.items.map(function (row, ri) {
         return (React.createElement(Row, { key: ri }, row.map(function (column, ci) {
             var _a = column.data, mobile = _a.mobile, tablet = _a.tablet, desktop = _a.desktop, component = _a.component;
-            return (React.createElement(Column, { mobile: mobile, tablet: tablet, desktop: desktop, key: ci }, store.build(component, data)));
+            return (React.createElement(Column, { mobile: mobile, tablet: tablet, desktop: desktop, key: ci }, store.build(component)));
         })));
     })));
 };
@@ -356,13 +362,12 @@ var Grid$1 = register('Grid', GridStructure, null, childrens$1)(GridContainer);
 
 var ContainerStyled = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  display: flex;\n\n  padding: 8px;\n"], ["\n  display: flex;\n\n  padding: 8px;\n"])));
 var Container$1 = function (_a) {
-    var structure = _a.structure, data = _a.data, store = _a.store;
+    var structure = _a.structure, store = _a.store;
     return (React.createElement(ContainerStyled, null, structure.components.map(function (component, index) {
-        return React.createElement(React.Fragment, { key: index }, store.build(component, data));
+        return React.createElement(React.Fragment, { key: index }, store.build(component));
     })));
 };
 var templateObject_1$4;
-//# sourceMappingURL=Container.js.map
 
 var ContainerStructure = {
     properties: {
@@ -389,13 +394,8 @@ var Container$2 = register('Container', ContainerStructure, null, childrens$2)(C
 
 var TextContainer = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  padding: 8px;\n"], ["\n  padding: 8px;\n"])));
 var Text = function (_a) {
-    var structure = _a.structure, data = _a.data;
-    var state = useState({
-        name: structure.name,
-        type: structure.type,
-    })[0];
-    var name = state.name;
-    return React.createElement(TextContainer, null, data[name]);
+    var data = _a.data;
+    return React.createElement(TextContainer, null, data);
 };
 var templateObject_1$5;
 //# sourceMappingURL=Text.js.map

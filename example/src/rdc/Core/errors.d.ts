@@ -26,6 +26,7 @@ interface ErrorTemplateRoot {
 interface ErrorTemplate {
     version: number;
     name: string;
+    type?: string;
     title: string;
     root: ErrorTemplateRoot;
 }

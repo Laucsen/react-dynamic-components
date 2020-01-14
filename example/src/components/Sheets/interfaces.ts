@@ -1,4 +1,4 @@
-import { Store, Data } from '../../rdc';
+import { Store } from '../../rdc';
 
 interface SheetsStructure {
   name: string;
@@ -7,6 +7,6 @@ interface SheetsStructure {
 
 export interface SheetProps {
   structure: SheetsStructure;
-  data: Data;
+  data: string;
   store: Store;
 }

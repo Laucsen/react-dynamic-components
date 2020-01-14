@@ -4,8 +4,8 @@ import RDC from '../../rdc';
 
 import { SheetProps } from './interfaces';
 
-const Sheets: React.FC<SheetProps> = ({ structure, data }) => {
-  const [type] = useState(data[structure.name]);
+const Sheets: React.FC<SheetProps> = ({ data }) => {
+  const [type] = useState(data);
 
   const [sheetStructure, setSheetStructure] = useState<null | string>(null);
   const [sheetData, setSheetData] = useState<null | string>(null);

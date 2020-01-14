@@ -1,6 +1,6 @@
 import { RootContainerStructure } from './interfaces';
-import { StrctureBase } from '../../Core/interfaces';
+import { StructureBase } from '../../Core/interfaces';
 
-export default (structure: RootContainerStructure): StrctureBase[] | null => {
+export default (structure: RootContainerStructure): StructureBase[] | null => {
   return [structure.root];
 };

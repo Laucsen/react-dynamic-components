@@ -1,6 +1,6 @@
-import { StrctureBase } from '../../Core/interfaces';
+import { StructureBase } from '../../Core/interfaces';
 export interface ContainerStructure {
-    components: StrctureBase[];
+    components: StructureBase[];
 }
-declare const _default: (structure: ContainerStructure) => StrctureBase[] | null;
+declare const _default: (structure: ContainerStructure) => StructureBase[] | null;
 export default _default;

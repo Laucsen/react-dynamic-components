@@ -31,7 +31,7 @@ export interface StructureError {
     name: string;
     component: string;
     message: string;
-    schemaPath: string;
+    schemaPath?: string;
 }
 export interface Store {
     getState: () => State;

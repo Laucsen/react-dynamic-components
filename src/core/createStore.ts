@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 
-import { Store, State, GetChildren, StrctureBase, StructureError } from './interfaces';
+import { Store, State, GetChildren, StructureBase, StructureError, Data } from './interfaces';
 import { createElement } from './wrappers';
 import { formatStructureErrors } from './errors';
 
@@ -24,13 +24,21 @@ const getComponentNameFromStructure = (structure: any): string => {
 
 const createStore = (): Store => {
   const state: State = {
+    data: {},
     components: {},
-    structures: {},
+    structuresSchemas: {},
     dataSchema: {},
     childrens: {},
   };
 
   const getState = () => Object.freeze({ ...state });
+
+  const storeData = (data: Data) => {
+    state.data = {
+      ...state.data,
+      ...data.data,
+    };
+  };
 
   const registerComponent = (
     name: string,
@@ -40,15 +48,16 @@ const createStore = (): Store => {
     compoentChildrens: GetChildren = () => null,
   ) => {
     state.components[name] = component;
-    state.structures[name] = componentStructureSchema;
+    state.structuresSchemas[name] = componentStructureSchema;
     state.dataSchema[name] = componentDataSchema;
     state.childrens[name] = compoentChildrens;
   };
 
-  const build = (structure: object, data: object) => {
+  const build = (structure: StructureBase) => {
     const type = getComponentTypeFromStructure(structure);
+    const currentData = state.data[structure.name];
     const Element = state.components[type];
-    return createElement(Element, structure, data);
+    return createElement(Element, structure, currentData);
   };
 
   interface StructureAnalysis {
@@ -72,7 +81,7 @@ const createStore = (): Store => {
       const currentItem = toAnalyze[0];
       toAnalyze.shift();
 
-      const structureSchema = state.structures[currentItem.currentType];
+      const structureSchema = state.structuresSchemas[currentItem.currentType];
       if (!structureSchema) {
         return [
           {
@@ -98,7 +107,7 @@ const createStore = (): Store => {
 
       if (childrens) {
         const futureAnalysis = childrens.map(
-          (child: StrctureBase): StructureAnalysis => {
+          (child: StructureBase): StructureAnalysis => {
             return {
               currentType: child.type,
               currentStructure: child,
@@ -112,7 +121,7 @@ const createStore = (): Store => {
     return [];
   };
 
-  return { getState, registerComponent, build, validateStructure };
+  return { getState, registerComponent, build, validateStructure, storeData };
 };
 
 export default createStore;

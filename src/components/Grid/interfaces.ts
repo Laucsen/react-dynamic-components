@@ -1,4 +1,4 @@
-import { Store, StrctureBase } from '../..';
+import { Store, StructureBase } from '../..';
 
 export interface ColumnProps {
   mobile: number;
@@ -7,27 +7,26 @@ export interface ColumnProps {
 }
 
 interface ColumnStructure extends ColumnProps {
-  component: object;
+  component: StructureBase;
 }
 
 interface RowStructure {
   data: ColumnStructure;
 }
 
-interface GeidStructure {
+interface GridPropsStructure {
   name: string;
   type: string;
   items: RowStructure[][];
 }
 
 export interface GridProps {
-  structure: GeidStructure;
-  data: object;
+  structure: GridPropsStructure;
   store: Store;
 }
 
 export interface GridComponentStructure {
-  component: StrctureBase;
+  component: StructureBase;
 }
 
 export interface GridColumnStructure {

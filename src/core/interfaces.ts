@@ -11,26 +11,27 @@ interface DataSchemaIndex {
   [index: string]: any;
 }
 
-export interface StrctureBase {
+export interface StructureBase {
   name: string;
   type: string;
 }
 
-export type GetChildren = (structure: any) => StrctureBase[] | null;
+export type GetChildren = (structure: any) => StructureBase[] | null;
 
 interface GetChildrenIndex {
   [index: string]: GetChildren;
 }
 
-export interface State {
-  components: ComponentsIndex;
-  structures: StructuresIndex;
-  dataSchema: DataSchemaIndex;
-  childrens: GetChildrenIndex;
-}
-
 export interface Data {
   [index: string]: any;
+}
+
+export interface State {
+  data: Data;
+  components: ComponentsIndex;
+  structuresSchemas: StructuresIndex;
+  dataSchema: DataSchemaIndex;
+  childrens: GetChildrenIndex;
 }
 
 export interface DataConfig {
@@ -53,8 +54,9 @@ export interface Store {
     componentDataSchema: any | null,
     compoentChildrens: GetChildren,
   ) => void;
-  build: (structure: object, data: object) => any;
+  build: (structure: StructureBase) => any;
   validateStructure: (structur: any) => StructureError[];
+  storeData: (data: Data) => void;
 }
 
 // Core Component related
@@ -62,9 +64,4 @@ export interface CoreProps {
   structure: string;
   data: string;
   store: Store;
-}
-
-export interface CoreBaseState {
-  structure: object;
-  data: DataConfig;
 }

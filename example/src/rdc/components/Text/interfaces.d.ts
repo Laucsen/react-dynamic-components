@@ -1,11 +1,11 @@
-import { Store, Data } from '../..';
+import { Store } from '../..';
 interface TextStructure {
     name: string;
     type: string;
 }
 export interface TextProps {
     structure: TextStructure;
-    data: Data;
+    data: string;
     store: Store;
 }
 export {};

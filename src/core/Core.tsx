@@ -3,42 +3,41 @@ import React, { useState, useEffect } from 'react';
 import { connectController } from './store';
 import { getErrorsStructureAndData } from './errors';
 
-import { CoreProps, CoreBaseState, StructureError } from './interfaces';
+import { CoreProps, StructureError, StructureBase } from './interfaces';
 
-const Core: React.FC<CoreProps> = ({ structure, data, store }) => {
-  const [state, setState] = useState<CoreBaseState | null>(null);
+const Core: React.FC<CoreProps> = ({ structure: structureStr, data, store }) => {
+  const [structure, setStructure] = useState<StructureBase | null>(null);
   const [errors, setErrors] = useState<StructureError[] | null>(null);
 
   useEffect(() => {
     try {
-      const validaData: CoreBaseState = {
-        structure: JSON.parse(structure),
-        data: JSON.parse(data),
-      };
+      const parsedData = JSON.parse(data);
+      const parsedStructure = JSON.parse(structureStr);
 
-      // - HOW TO VALIDATE?
-      const result = store.validateStructure(validaData.structure);
+      const result = store.validateStructure(parsedStructure);
       if (result.length !== 0) {
         setErrors(result);
       } else {
-        setState(validaData);
+        setStructure(parsedStructure);
+        store.storeData(parsedData);
       }
     } catch (err) {
       console.log('Error: ');
       console.log(err);
     }
-  }, [structure, data]);
+  }, [structureStr, data, store]);
 
   if (errors) {
     const errorsDef = getErrorsStructureAndData(errors);
-    return store.build(errorsDef.structure, errorsDef.data);
+    store.storeData(errorsDef.data);
+    return store.build(errorsDef.structure as StructureBase);
   }
 
-  if (!state) {
+  if (!structure) {
     return null;
   }
 
-  return store.build(state.structure, state.data.data);
+  return store.build(structure);
 };
 
 export default connectController(Core);

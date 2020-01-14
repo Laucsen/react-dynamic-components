@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
 import { TextProps } from './interfaces';
@@ -7,14 +7,8 @@ const TextContainer = styled.div`
   padding: 8px;
 `;
 
-const Text: React.FC<TextProps> = ({ structure, data }) => {
-  const [state] = useState({
-    name: structure.name,
-    type: structure.type,
-  });
-
-  const name = state.name;
-  return <TextContainer>{data[name]}</TextContainer>;
+const Text: React.FC<TextProps> = ({ data }) => {
+  return <TextContainer>{data}</TextContainer>;
 };
 
 export default Text;

@@ -1,14 +1,13 @@
-import { Store, Data } from '../..';
-import { StrctureBase } from '../../Core/interfaces';
+import { Store } from '../..';
+import { StructureBase } from '../../Core/interfaces';
 
 interface ContainerStrucutre {
   name?: string;
   type: string;
-  components: StrctureBase[];
+  components: StructureBase[];
 }
 
 export interface ContainerProps {
   structure: ContainerStrucutre;
-  data: Data;
   store: Store;
 }

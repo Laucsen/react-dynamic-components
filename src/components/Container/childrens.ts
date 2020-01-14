@@ -1,9 +1,9 @@
-import { StrctureBase } from '../../Core/interfaces';
+import { StructureBase } from '../../Core/interfaces';
 
 export interface ContainerStructure {
-  components: StrctureBase[];
+  components: StructureBase[];
 }
 
-export default (structure: ContainerStructure): StrctureBase[] | null => {
+export default (structure: ContainerStructure): StructureBase[] | null => {
   return structure.components;
 };
