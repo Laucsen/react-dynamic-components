@@ -1,0 +1,9 @@
+{
+	"version": 1,
+	"name": "gurps-structure",
+	"title": "Gurps Structure",
+	"root": {
+		"name": "gurps-title",
+		"type": "Text"
+	}
+}

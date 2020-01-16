@@ -1,33 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import RDC from '../../rdc';
+import { useRdcState } from '../../utils';
 
 import { SheetProps } from './interfaces';
 
-const Sheets: React.FC<SheetProps> = ({ data }) => {
-  const [type] = useState(data);
-
-  const [sheetStructure, setSheetStructure] = useState<null | string>(null);
-  const [sheetData, setSheetData] = useState<null | string>(null);
-
+const Sheets: React.FC<SheetProps> = ({ data: incommingData }) => {
+  const [type, setType] = useState(incommingData);
   useEffect(() => {
-    fetch(`/samples/${type}-structure.json`)
-      .then(res => res.text())
-      .then(res => setSheetStructure(res));
-  }, [type]);
-  useEffect(() => {
-    if (sheetStructure) {
-      fetch(`/samples/${type}-data.json`)
-        .then(res => res.text())
-        .then(res => setSheetData(res));
-    }
-  }, [type, sheetStructure]);
+    setType(incommingData);
+  }, [incommingData]);
 
-  if (!sheetStructure || !sheetData) {
+  const { structure, data } = useRdcState(`/samples/${type}-structure.json`, `/samples/${type}-data.json`);
+
+  if (!type) {
     return null;
   }
 
-  return <RDC structure={sheetStructure} data={sheetData} />;
+  if (!structure || !data) {
+    return null;
+  }
+
+  return <RDC structure={structure} data={data} />;
 };
 
 export default Sheets;

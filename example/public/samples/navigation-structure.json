@@ -1,0 +1,9 @@
+{
+	"version": 1,
+	"name": "navigation-structure",
+	"title": "Sheet Navigation Structure",
+	"root": {
+		"type": "Sheets",
+		"name": "current-sheet"
+	}
+}

@@ -36,7 +36,6 @@ function __makeTemplateObject(cooked, raw) {
 
 var createElement = function (Element, structure, data, rootData) { return (React.createElement(Element, { structure: structure, data: data, rootData: rootData })); };
 var createContextConsumer = function (StoreContext, Component, props) { return (React.createElement(StoreContext.Consumer, null, function (store) { return React.createElement(Component, __assign({}, props, { store: store })); })); };
-//# sourceMappingURL=wrappers.js.map
 
 var formatStructureErrors = function (componentType, componentName, errors) {
     if (!errors) {
@@ -105,7 +104,6 @@ var getErrorsStructureAndData = function (errors) {
         data: data,
     };
 };
-//# sourceMappingURL=errors.js.map
 
 var isRoot = function (structure) {
     return structure.type === undefined && structure.root !== undefined;
@@ -187,7 +185,6 @@ var createStore = function () {
     };
     return { getState: getState, registerComponent: registerComponent, build: build, validateStructure: validateStructure };
 };
-//# sourceMappingURL=createStore.js.map
 
 var globalStore = createStore();
 var StoreContext = React.createContext(globalStore);
@@ -202,7 +199,6 @@ var register = function (componentName, componentStructureSchema, componentDataS
         return consumerBuilder;
     };
 };
-//# sourceMappingURL=store.js.map
 
 var Core = function (_a) {
     var structureStr = _a.structure, dataStr = _a.data, store = _a.store;
@@ -239,9 +235,6 @@ var Core = function (_a) {
     return store.build(state.structure, state.data);
 };
 var Core$1 = connectController(Core);
-//# sourceMappingURL=Core.js.map
-
-//# sourceMappingURL=index.js.map
 
 var Container = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
 var RootContainer = function (_a) {
@@ -249,7 +242,6 @@ var RootContainer = function (_a) {
     return React.createElement(Container, null, store.build(structure.root, rootData));
 };
 var templateObject_1;
-//# sourceMappingURL=RootContainer.js.map
 
 var RootStructure = {
     properties: {
@@ -260,22 +252,18 @@ var RootStructure = {
     },
     required: ['version', 'name', 'title', 'root'],
 };
-//# sourceMappingURL=structure.js.map
 
 var childrens = (function (structure) {
     return [structure.root];
 });
-//# sourceMappingURL=childrens.js.map
 
 var RootContainer$1 = register('RootContainer', RootStructure, null, childrens)(RootContainer);
-//# sourceMappingURL=index.js.map
 
 // Compute the size of a column and return a CSS width line.
 var getWidthGrid = function (value) {
     var width = (value / 12) * 100;
     return "width: " + width + "%;";
 };
-//# sourceMappingURL=utils.js.map
 
 var Column = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"], ["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"])), function (_a) {
     var mobile = _a.mobile;
@@ -288,11 +276,9 @@ var Column = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTempla
     return desktop && getWidthGrid(desktop);
 });
 var templateObject_1$1;
-//# sourceMappingURL=Column.js.map
 
 var Row = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
 var templateObject_1$2;
-//# sourceMappingURL=Row.js.map
 
 var Grid = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
 var GridContainer = function (_a) {
@@ -309,7 +295,6 @@ var GridContainer = function (_a) {
     })));
 };
 var templateObject_1$3;
-//# sourceMappingURL=Grid.js.map
 
 var GridStructure = {
     properties: {
@@ -340,7 +325,6 @@ var GridStructure = {
     },
     required: ['type', 'name', 'items'],
 };
-//# sourceMappingURL=structure.js.map
 
 var childrens$1 = (function (structure) {
     var mapped = structure.items
@@ -353,10 +337,8 @@ var childrens$1 = (function (structure) {
     });
     return mapped;
 });
-//# sourceMappingURL=childrens.js.map
 
 var Grid$1 = register('Grid', GridStructure, null, childrens$1)(GridContainer);
-//# sourceMappingURL=index.js.map
 
 var ContainerStyled = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  display: flex;\n\n  padding: 8px;\n"], ["\n  display: flex;\n\n  padding: 8px;\n"])));
 var Container$1 = function (_a) {
@@ -380,12 +362,10 @@ var ContainerStructure = {
     },
     required: ['type', 'components'],
 };
-//# sourceMappingURL=structure.js.map
 
 var childrens$2 = (function (structure) {
     return structure.components;
 });
-//# sourceMappingURL=childrens.js.map
 
 var Container$2 = register('Container', ContainerStructure, null, childrens$2)(Container$1);
 
@@ -395,7 +375,6 @@ var Text = function (_a) {
     return React.createElement(TextContainer, null, data);
 };
 var templateObject_1$5;
-//# sourceMappingURL=Text.js.map
 
 var TextStructure = {
     properties: {
@@ -404,10 +383,8 @@ var TextStructure = {
     },
     required: ['type', 'name'],
 };
-//# sourceMappingURL=structure.js.map
 
 var Text$1 = register('Text', TextStructure)(Text);
-//# sourceMappingURL=index.js.map
 
 export default Core$1;
 export { Column, Container$2 as Container, Grid$1 as Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };
