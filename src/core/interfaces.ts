@@ -27,7 +27,6 @@ export interface Data {
 }
 
 export interface State {
-  data: Data;
   components: ComponentsIndex;
   structuresSchemas: StructuresIndex;
   dataSchema: DataSchemaIndex;
@@ -54,9 +53,8 @@ export interface Store {
     componentDataSchema: any | null,
     compoentChildrens: GetChildren,
   ) => void;
-  build: (structure: StructureBase) => any;
+  build: (structure: StructureBase, data: DataConfig) => any;
   validateStructure: (structur: any) => StructureError[];
-  storeData: (data: Data) => void;
 }
 
 // Core Component related
@@ -64,4 +62,9 @@ export interface CoreProps {
   structure: string;
   data: string;
   store: Store;
+}
+
+export interface CoreState {
+  structure: StructureBase;
+  data: DataConfig;
 }

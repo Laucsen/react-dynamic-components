@@ -1,5 +1,5 @@
 import { Store } from '../..';
-import { StructureBase } from '../../Core/interfaces';
+import { StructureBase, DataConfig } from '../../Core/interfaces';
 interface ContainerStrucutre {
     name?: string;
     type: string;
@@ -8,5 +8,6 @@ interface ContainerStrucutre {
 export interface ContainerProps {
     structure: ContainerStrucutre;
     store: Store;
+    rootData: DataConfig;
 }
 export {};

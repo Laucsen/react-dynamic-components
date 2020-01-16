@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Store } from './interfaces';
 
-export const createElement = (Element: any, structure: object, data: any) => (
-  <Element structure={structure} data={data} />
+export const createElement = (Element: any, structure: object, data: any, rootData: object) => (
+  <Element structure={structure} data={data} rootData={rootData} />
 );
 
 export const createContextConsumer = (StoreContext: any, Component: any, props: any) => (

@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 
-import { Store, State, GetChildren, StructureBase, StructureError, Data } from './interfaces';
+import { Store, State, GetChildren, StructureBase, StructureError, DataConfig } from './interfaces';
 import { createElement } from './wrappers';
 import { formatStructureErrors } from './errors';
 
@@ -24,7 +24,6 @@ const getComponentNameFromStructure = (structure: any): string => {
 
 const createStore = (): Store => {
   const state: State = {
-    data: {},
     components: {},
     structuresSchemas: {},
     dataSchema: {},
@@ -32,13 +31,6 @@ const createStore = (): Store => {
   };
 
   const getState = () => Object.freeze({ ...state });
-
-  const storeData = (data: Data) => {
-    state.data = {
-      ...state.data,
-      ...data.data,
-    };
-  };
 
   const registerComponent = (
     name: string,
@@ -53,11 +45,11 @@ const createStore = (): Store => {
     state.childrens[name] = compoentChildrens;
   };
 
-  const build = (structure: StructureBase) => {
+  const build = (structure: StructureBase, data: DataConfig) => {
     const type = getComponentTypeFromStructure(structure);
-    const currentData = state.data[structure.name];
+    const currentData = data.data[structure.name];
     const Element = state.components[type];
-    return createElement(Element, structure, currentData);
+    return createElement(Element, structure, currentData, data);
   };
 
   interface StructureAnalysis {
@@ -121,7 +113,7 @@ const createStore = (): Store => {
     return [];
   };
 
-  return { getState, registerComponent, build, validateStructure, storeData };
+  return { getState, registerComponent, build, validateStructure };
 };
 
 export default createStore;

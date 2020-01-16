@@ -23,7 +23,7 @@ const Grid = styled.div`
   }
 `;
 
-const GridContainer: React.FC<GridProps> = ({ structure, store }) => {
+const GridContainer: React.FC<GridProps> = ({ structure, store, rootData }) => {
   const [] = useState({
     name: structure.name,
     type: structure.type,
@@ -37,7 +37,7 @@ const GridContainer: React.FC<GridProps> = ({ structure, store }) => {
               const { mobile, tablet, desktop, component } = column.data;
               return (
                 <Column mobile={mobile} tablet={tablet} desktop={desktop} key={ci}>
-                  {store.build(component)}
+                  {store.build(component, rootData)}
                 </Column>
               );
             })}

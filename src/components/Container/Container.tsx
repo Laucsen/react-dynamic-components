@@ -10,11 +10,11 @@ const ContainerStyled = styled.div`
   padding: 8px;
 `;
 
-const Container: React.FC<ContainerProps> = ({ structure, store }) => {
+const Container: React.FC<ContainerProps> = ({ store, structure, rootData }) => {
   return (
     <ContainerStyled>
       {structure.components.map((component: StructureBase, index: number) => {
-        return <React.Fragment key={index}>{store.build(component)}</React.Fragment>;
+        return <React.Fragment key={index}>{store.build(component, rootData)}</React.Fragment>;
       })}
     </ContainerStyled>
   );

@@ -1,4 +1,5 @@
 import { Store, StructureBase } from '../..';
+import { DataConfig } from '../../Core/interfaces';
 export interface ColumnProps {
     mobile: number;
     tablet: number;
@@ -18,6 +19,7 @@ interface GridPropsStructure {
 export interface GridProps {
     structure: GridPropsStructure;
     store: Store;
+    rootData: DataConfig;
 }
 export interface GridComponentStructure {
     component: StructureBase;
