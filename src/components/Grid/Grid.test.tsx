@@ -1,32 +1,42 @@
-import * as React from 'react';
-import styled from 'styled-components';
+import React from 'react';
 import { mount } from 'enzyme';
 
-import { Grid, Row, Column } from '.';
+import RDC from '../../';
 
-const SimpleText = styled.div`
-  color: blue;
-`;
+const structure = {
+  version: 1,
+  name: 'base-structure',
+  title: 'React Dynamic Components',
+  root: {
+    name: 'main-grid',
+    type: 'Grid',
+    items: [
+      [
+        {
+          data: {
+            mobile: 6,
+            tablet: 12,
+            desktop: 12,
+            component: {
+              type: 'dummy',
+            },
+          },
+        },
+      ],
+    ],
+  },
+};
+
+const data = {
+  version: 1,
+  data: {},
+};
 
 describe('<Grid />', () => {
   it('renders a Container with sub elements', () => {
-    const Wrapper = mount(
-      <Grid>
-        <Row>
-          <Column mobile={6} tablet={12} desktop={5}>
-            <SimpleText>mobile 6 / tablet 12 / desktop 5</SimpleText>
-          </Column>
-          <Column mobile={6} tablet={6} desktop={5}>
-            <SimpleText>mobile 6 / tablet 6 / desktop 5</SimpleText>
-          </Column>
-          <Column mobile={12} tablet={6} desktop={2}>
-            <SimpleText>mobile 12 / tablet 6 / desktop 2</SimpleText>
-          </Column>
-        </Row>
-      </Grid>,
-    );
+    const Wrapper = mount(<RDC structure={structure} data={data} />);
 
-    expect(Wrapper.find(Column)).toHaveLength(3);
+    console.log(Wrapper.html());
 
     expect(true).toBeTruthy();
   });
