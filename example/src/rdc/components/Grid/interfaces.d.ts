@@ -1,5 +1,6 @@
 import { Store, StructureBase } from '../..';
 import { DataConfig } from '../../Core/interfaces';
+import { RdcTheme, StyledBackgrond } from '../../';
 export interface ColumnProps {
     mobile: number;
     tablet: number;
@@ -11,10 +12,14 @@ interface ColumnStructure extends ColumnProps {
 interface RowStructure {
     data: ColumnStructure;
 }
-interface GridPropsStructure {
+interface BackgroundStyle {
+    color?: string;
+}
+export interface GridPropsStructure {
     name: string;
     type: string;
     items: RowStructure[][];
+    background?: BackgroundStyle;
 }
 export interface GridProps {
     structure: GridPropsStructure;
@@ -29,5 +34,9 @@ export interface GridColumnStructure {
 }
 export interface GridStructure {
     items: GridColumnStructure[][];
+}
+export interface GridAreaStyleProps {
+    theme?: RdcTheme;
+    background?: StyledBackgrond;
 }
 export {};

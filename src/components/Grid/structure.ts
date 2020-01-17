@@ -2,6 +2,12 @@ export default {
   properties: {
     type: { type: 'string' },
     name: { type: 'string' },
+    background: {
+      type: 'object',
+      properties: {
+        color: { type: 'string' },
+      },
+    },
     items: {
       type: 'array',
       items: {

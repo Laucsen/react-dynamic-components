@@ -1,35 +1,25 @@
-import React, { useState } from 'react';
-import styled from 'styled-components';
+import React from 'react';
 
-import { GridProps } from './interfaces';
+import { GridArea } from './styles';
+
+import { GridProps, GridPropsStructure } from './interfaces';
 
 import Row from './Row';
 import Column from './Column';
 
-const Grid = styled.div`
-  max-width: 1360px;
-  padding-right: 15px;
-  padding-left: 15px;
-  margin-right: auto;
-  margin-left: auto;
-  box-sizing: border-box;
-  &:before,
-  &:after {
-    content: ' ';
-    display: table;
-  }
-  &:after {
-    clear: both;
-  }
-`;
+const extractStyles = (structure: GridPropsStructure) => {
+  return {
+    background: {
+      color: structure.background ? structure.background.color : '',
+    },
+  };
+};
 
 const GridContainer: React.FC<GridProps> = ({ structure, store, rootData }) => {
-  const [] = useState({
-    name: structure.name,
-    type: structure.type,
-  });
+  const styles = extractStyles(structure);
+
   return (
-    <Grid>
+    <GridArea {...styles}>
       {structure.items.map((row, ri) => {
         return (
           <Row key={ri}>
@@ -44,7 +34,7 @@ const GridContainer: React.FC<GridProps> = ({ structure, store, rootData }) => {
           </Row>
         );
       })}
-    </Grid>
+    </GridArea>
   );
 };
 

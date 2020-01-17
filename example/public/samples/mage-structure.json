@@ -5,6 +5,9 @@
 	"root": {
 		"name": "main-grid",
 		"type": "Grid",
+		"background": {
+			"color": "c-1"
+		},
 		"items": [
 			[
 				{

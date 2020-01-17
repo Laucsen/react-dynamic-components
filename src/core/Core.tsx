@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { ThemeProvider } from 'styled-components';
 
 import { connectController } from './store';
 import { getErrorsStructureAndData } from './errors';
+import theme from './themes';
 
 import { CoreProps, StructureError, StructureBase, CoreState } from './interfaces';
 
@@ -39,7 +41,7 @@ const Core: React.FC<CoreProps> = ({ structure: structureStr, data: dataStr, sto
     return null;
   }
 
-  return store.build(state.structure, state.data);
+  return <ThemeProvider theme={theme}>{store.build(state.structure, state.data)}</ThemeProvider>;
 };
 
 export default connectController(Core);

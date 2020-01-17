@@ -1,1 +1,1 @@
-export { convertData } from './data';
+export * from './styles';

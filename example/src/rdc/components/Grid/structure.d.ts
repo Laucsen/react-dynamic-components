@@ -6,6 +6,14 @@ declare const _default: {
         name: {
             type: string;
         };
+        background: {
+            type: string;
+            properties: {
+                color: {
+                    type: string;
+                };
+            };
+        };
         items: {
             type: string;
             items: {
