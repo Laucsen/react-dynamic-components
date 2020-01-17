@@ -256,19 +256,49 @@ var Core$1 = connectController(Core);
 
 //# sourceMappingURL=index.js.map
 
-var Container = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject([""], [""])));
+var getColorFromTheme = function (theme, colorName) {
+    if (theme && colorName) {
+        return theme.colors[colorName];
+    }
+    return null;
+};
+var getBackgroundColor = function (theme, background) {
+    if (!theme || !background) {
+        return null;
+    }
+    var color = getColorFromTheme(theme, background.color);
+    return color || background.color;
+};
+var useDefaultStyles = function (structure) {
+    return {
+        background: {
+            color: structure.background ? structure.background.color : '',
+        },
+    };
+};
+//# sourceMappingURL=styles.js.map
+
+var Container = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  background-color: ", ";\n"], ["\n  background-color: ", ";\n"])), function (props) { return getBackgroundColor(props.theme, props.background); });
+var templateObject_1;
+//# sourceMappingURL=styles.js.map
+
 var RootContainer = function (_a) {
     var structure = _a.structure, store = _a.store, rootData = _a.rootData;
-    return React.createElement(Container, null, store.build(structure.root, rootData));
+    var styles = useDefaultStyles(structure);
+    return React.createElement(Container, __assign({}, styles), store.build(structure.root, rootData));
 };
-var templateObject_1;
-//# sourceMappingURL=RootContainer.js.map
 
 var RootStructure = {
     properties: {
         version: { type: 'number' },
         name: { type: 'string' },
         title: { type: 'string' },
+        background: {
+            type: 'object',
+            properties: {
+                color: { type: 'string' },
+            },
+        },
         root: { tyoe: 'object' },
     },
     required: ['version', 'name', 'title', 'root'],
@@ -281,7 +311,6 @@ var childrens = (function (structure) {
 //# sourceMappingURL=childrens.js.map
 
 var RootContainer$1 = register('RootContainer', RootStructure, null, childrens)(RootContainer);
-//# sourceMappingURL=index.js.map
 
 // Compute the size of a column and return a CSS width line.
 var getWidthGrid = function (value) {
@@ -307,34 +336,13 @@ var Row = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateO
 var templateObject_1$2;
 //# sourceMappingURL=Row.js.map
 
-var getColorFromTheme = function (theme, colorName) {
-    if (theme && colorName) {
-        return theme.colors[colorName];
-    }
-    return null;
-};
-var getBackgroundColor = function (theme, background) {
-    if (!theme || !background) {
-        return null;
-    }
-    var color = getColorFromTheme(theme, background.color);
-    return color || background.color;
-};
-//# sourceMappingURL=styles.js.map
-
 var GridArea = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  background-color: ", ";\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  background-color: ", ";\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])), function (props) { return getBackgroundColor(props.theme, props.background); });
 var templateObject_1$3;
+//# sourceMappingURL=styles.js.map
 
-var extractStyles = function (structure) {
-    return {
-        background: {
-            color: structure.background ? structure.background.color : '',
-        },
-    };
-};
 var GridContainer = function (_a) {
     var structure = _a.structure, store = _a.store, rootData = _a.rootData;
-    var styles = extractStyles(structure);
+    var styles = useDefaultStyles(structure);
     return (React.createElement(GridArea, __assign({}, styles), structure.items.map(function (row, ri) {
         return (React.createElement(Row, { key: ri }, row.map(function (column, ci) {
             var _a = column.data, mobile = _a.mobile, tablet = _a.tablet, desktop = _a.desktop, component = _a.component;
@@ -391,20 +399,20 @@ var childrens$1 = (function (structure) {
     });
     return mapped;
 });
-//# sourceMappingURL=childrens.js.map
 
 var Grid = register('Grid', GridStructure, null, childrens$1)(GridContainer);
-//# sourceMappingURL=index.js.map
 
-var ContainerStyled = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  display: flex;\n\n  padding: 8px;\n"], ["\n  display: flex;\n\n  padding: 8px;\n"])));
+var ContainerStyled = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  display: flex;\n\n  background-color: ", ";\n\n  padding: 8px;\n"], ["\n  display: flex;\n\n  background-color: ", ";\n\n  padding: 8px;\n"])), function (props) { return getBackgroundColor(props.theme, props.background); });
+var templateObject_1$4;
+//# sourceMappingURL=styles.js.map
+
 var Container$1 = function (_a) {
     var store = _a.store, structure = _a.structure, rootData = _a.rootData;
-    return (React.createElement(ContainerStyled, null, structure.components.map(function (component, index) {
+    var styles = useDefaultStyles(structure);
+    return (React.createElement(ContainerStyled, __assign({}, styles), structure.components.map(function (component, index) {
         return React.createElement(React.Fragment, { key: index }, store.build(component, rootData));
     })));
 };
-var templateObject_1$4;
-//# sourceMappingURL=Container.js.map
 
 var ContainerStructure = {
     properties: {
@@ -427,7 +435,6 @@ var childrens$2 = (function (structure) {
 //# sourceMappingURL=childrens.js.map
 
 var Container$2 = register('Container', ContainerStructure, null, childrens$2)(Container$1);
-//# sourceMappingURL=index.js.map
 
 var TextContainer = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  padding: 8px;\n"], ["\n  padding: 8px;\n"])));
 var Text = function (_a) {
@@ -447,7 +454,6 @@ var TextStructure = {
 //# sourceMappingURL=structure.js.map
 
 var Text$1 = register('Text', TextStructure)(Text);
-//# sourceMappingURL=index.js.map
 
 export default Core$1;
-export { Column, Container$2 as Container, Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register };
+export { Column, Container$2 as Container, Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register, useDefaultStyles };

@@ -2,22 +2,15 @@ import React from 'react';
 
 import { GridArea } from './styles';
 
-import { GridProps, GridPropsStructure } from './interfaces';
+import { GridProps } from './interfaces';
 
 import Row from './Row';
 import Column from './Column';
 
-const extractStyles = (structure: GridPropsStructure) => {
-  return {
-    background: {
-      color: structure.background ? structure.background.color : '',
-    },
-  };
-};
+import { useDefaultStyles } from '../..';
 
 const GridContainer: React.FC<GridProps> = ({ structure, store, rootData }) => {
-  const styles = extractStyles(structure);
-
+  const styles = useDefaultStyles(structure);
   return (
     <GridArea {...styles}>
       {structure.items.map((row, ri) => {

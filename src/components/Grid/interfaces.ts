@@ -1,4 +1,4 @@
-import { Store, StructureBase } from '../..';
+import { Store, StructureBase, DefaultConfigStyles } from '../..';
 import { DataConfig } from '../../Core/interfaces';
 import { RdcTheme, StyledBackgrond } from '../../';
 
@@ -20,11 +20,10 @@ interface BackgroundStyle {
   color?: string;
 }
 
-export interface GridPropsStructure {
+export interface GridPropsStructure extends DefaultConfigStyles {
   name: string;
   type: string;
   items: RowStructure[][];
-  background?: BackgroundStyle;
 }
 
 export interface GridProps {

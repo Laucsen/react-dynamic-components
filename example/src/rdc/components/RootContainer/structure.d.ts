@@ -9,6 +9,14 @@ declare const _default: {
         title: {
             type: string;
         };
+        background: {
+            type: string;
+            properties: {
+                color: {
+                    type: string;
+                };
+            };
+        };
         root: {
             tyoe: string;
         };

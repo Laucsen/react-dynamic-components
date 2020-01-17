@@ -1,4 +1,6 @@
 import { RdcTheme } from '../Core/themes/interfaces';
+
+import { DefaultConfigStyles } from './interfaces';
 import { StyledBackgrond } from '../core/styles/interfaces';
 
 export const getColorFromTheme = (theme?: RdcTheme, colorName?: string) => {
@@ -15,4 +17,12 @@ export const getBackgroundColor = (theme?: RdcTheme, background?: StyledBackgron
 
   const color = getColorFromTheme(theme, background.color);
   return color || background.color;
+};
+
+export const useDefaultStyles = (structure: DefaultConfigStyles) => {
+  return {
+    background: {
+      color: structure.background ? structure.background.color : '',
+    },
+  };
 };

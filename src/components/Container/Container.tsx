@@ -1,18 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 
+import { StructureBase, useDefaultStyles } from '../..';
 import { ContainerProps } from './interfaces';
-import { StructureBase } from '../..';
-
-const ContainerStyled = styled.div`
-  display: flex;
-
-  padding: 8px;
-`;
+import { ContainerStyled } from './styles';
 
 const Container: React.FC<ContainerProps> = ({ store, structure, rootData }) => {
+  const styles = useDefaultStyles(structure);
   return (
-    <ContainerStyled>
+    <ContainerStyled {...styles}>
       {structure.components.map((component: StructureBase, index: number) => {
         return <React.Fragment key={index}>{store.build(component, rootData)}</React.Fragment>;
       })}

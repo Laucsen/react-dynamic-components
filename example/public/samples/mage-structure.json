@@ -17,6 +17,9 @@
 						"desktop": 5,
 						"component": {
 							"type": "Container",
+							"background": {
+								"color": "c-2"
+							},
 							"components": [
 								{
 									"type": "Text",
@@ -33,6 +36,9 @@
 						"desktop": 5,
 						"component": {
 							"type": "Container",
+							"background": {
+								"color": "c-3"
+							},
 							"components": [
 								{
 									"type": "Text",
@@ -49,6 +55,9 @@
 						"desktop": 2,
 						"component": {
 							"type": "Container",
+							"background": {
+								"color": "c-4"
+							},
 							"components": [
 								{
 									"type": "Text",
@@ -67,6 +76,9 @@
 						"desktop": 12,
 						"component": {
 							"type": "Container",
+							"background": {
+								"color": "c-5"
+							},
 							"components": [
 								{
 									"type": "Text",

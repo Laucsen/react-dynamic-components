@@ -1,12 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
 
 import { RootContainerProps } from './interfaces';
+import { Container } from './styles';
 
-const Container = styled.div``;
+import { useDefaultStyles } from '../..';
 
 const RootContainer: React.FC<RootContainerProps> = ({ structure, store, rootData }) => {
-  return <Container>{store.build(structure.root, rootData)}</Container>;
+  const styles = useDefaultStyles(structure);
+  return <Container {...styles}>{store.build(structure.root, rootData)}</Container>;
 };
 
 export default RootContainer;

@@ -1,7 +1,7 @@
-interface ColorIndex {
+interface RdcThemeColorIndex {
     [index: string]: string;
 }
 export interface RdcTheme {
-    colors: ColorIndex;
+    colors: RdcThemeColorIndex;
 }
 export {};
