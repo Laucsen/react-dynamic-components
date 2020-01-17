@@ -12,7 +12,7 @@ import { useDefaultStyles } from '../..';
 const GridContainer: React.FC<GridProps> = ({ structure, store, rootData }) => {
   const styles = useDefaultStyles(structure);
   return (
-    <GridArea {...styles}>
+    <GridArea data-rdc-name={structure.name} {...styles}>
       {structure.items.map((row, ri) => {
         return (
           <Row key={ri}>

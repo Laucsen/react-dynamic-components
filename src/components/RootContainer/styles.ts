@@ -1,9 +1,7 @@
 import styled from 'styled-components';
 
-import { RootContainerStyleProps } from './interfaces';
+import { appendDefaultStyles } from '../../utils';
 
-import { getBackgroundColor } from '../../utils';
-
-export const Container: React.FC<RootContainerStyleProps> = styled.div`
-  background-color: ${(props: RootContainerStyleProps) => getBackgroundColor(props.theme, props.background)};
+export const Container = styled.div`
+  ${props => appendDefaultStyles(props)}
 `;

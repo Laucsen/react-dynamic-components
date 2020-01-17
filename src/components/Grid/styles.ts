@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
-import { getBackgroundColor } from '../../utils';
+import { appendDefaultStyles } from '../../utils';
 
-import { GridAreaStyleProps } from './interfaces';
-
-export const GridArea: React.FC<GridAreaStyleProps> = styled.div`
+export const GridArea = styled.div`
   max-width: 1360px;
   padding-right: 15px;
   padding-left: 15px;
+  padding-top: 16px;
+  padding-bottom: 32px;
   margin-right: auto;
   margin-left: auto;
   box-sizing: border-box;
-
-  background-color: ${(props: GridAreaStyleProps) => getBackgroundColor(props.theme, props.background)};
 
   &:before,
   &:after {
@@ -22,4 +20,6 @@ export const GridArea: React.FC<GridAreaStyleProps> = styled.div`
   &:after {
     clear: both;
   }
+
+  ${props => appendDefaultStyles(props)}
 `;

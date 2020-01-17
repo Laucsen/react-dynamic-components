@@ -1,4 +1,4 @@
-import { Store, StyledBackgrond, RdcTheme, DefaultConfigStyles } from '../..';
+import { Store, DefaultConfigStyles } from '../..';
 import { StructureBase, DataConfig } from '../../Core/interfaces';
 
 export interface ContainerStrucutre extends DefaultConfigStyles {
@@ -11,9 +11,4 @@ export interface ContainerProps {
   structure: ContainerStrucutre;
   store: Store;
   rootData: DataConfig;
-}
-
-export interface ContainerStyleProps {
-  theme?: RdcTheme;
-  background?: StyledBackgrond;
 }

@@ -1,3 +1,1 @@
-/// <reference types="react" />
-import { RootContainerStyleProps } from './interfaces';
-export declare const Container: React.FC<RootContainerStyleProps>;
+export declare const Container: import("styled-components").StyledComponent<"div", any, {}, never>;

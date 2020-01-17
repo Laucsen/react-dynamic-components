@@ -1,2 +1,1 @@
-import { ContainerStyleProps } from './interfaces';
-export declare const ContainerStyled: import("styled-components").StyledComponent<"div", any, ContainerStyleProps, never>;
+export declare const ContainerStyled: import("styled-components").StyledComponent<"div", any, {}, never>;

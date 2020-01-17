@@ -1,3 +1,1 @@
-/// <reference types="react" />
-import { GridAreaStyleProps } from './interfaces';
-export declare const GridArea: React.FC<GridAreaStyleProps>;
+export declare const GridArea: import("styled-components").StyledComponent<"div", any, {}, never>;

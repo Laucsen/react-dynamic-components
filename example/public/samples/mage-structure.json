@@ -3,10 +3,10 @@
 	"name": "mage-structure",
 	"title": "Mage Sheet Structure",
 	"root": {
-		"name": "main-grid",
+		"name": "mage-main-grid",
 		"type": "Grid",
 		"background": {
-			"color": "c-1"
+			"image": "images/crystal-background.jpg"
 		},
 		"items": [
 			[
