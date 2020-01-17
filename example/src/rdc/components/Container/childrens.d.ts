@@ -1,4 +1,4 @@
-import { StructureBase } from '../../Core/interfaces';
+import { StructureBase } from '../..';
 export interface ContainerStructure {
     components: StructureBase[];
 }

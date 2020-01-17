@@ -1,6 +1,7 @@
 import { ErrorObject } from 'ajv';
 
-import { StructureError, Data } from './interfaces';
+import { StructureError, ErrorLineTemplate, ErrorTemplate } from './interfaces';
+import { Data } from '../..';
 
 export const formatStructureErrors = (
   componentType: string,
@@ -19,41 +20,6 @@ export const formatStructureErrors = (
     };
   });
 };
-
-interface ErrorComponentData {
-  type: string;
-  name: string;
-}
-
-interface ErrorContainer {
-  type: string;
-  components: ErrorComponentData[];
-}
-
-interface ErrorData {
-  mobile: number;
-  tablet: number;
-  desktop: number;
-  component: ErrorContainer;
-}
-
-interface ErrorLineTemplate {
-  data: ErrorData;
-}
-
-interface ErrorTemplateRoot {
-  name: string;
-  type: string;
-  items: ErrorLineTemplate[][];
-}
-
-interface ErrorTemplate {
-  version: number;
-  name: string;
-  type?: string;
-  title: string;
-  root: ErrorTemplateRoot;
-}
 
 const errorLineTemplate: ErrorLineTemplate = {
   data: {

@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { connectController } from './store';
-import { getErrorsStructureAndData } from './errors';
+import { connectController, StructureBase } from './store';
+import { getErrorsStructureAndData, StructureError } from './errors';
 import theme from './themes';
 
-import { CoreProps, StructureError, StructureBase, CoreState } from './interfaces';
+import { CoreProps, CoreState } from './interfaces';
 
 const Core: React.FC<CoreProps> = ({ structure: structureStr, data: dataStr, store }) => {
   const [state, setState] = useState<CoreState | null>(null);

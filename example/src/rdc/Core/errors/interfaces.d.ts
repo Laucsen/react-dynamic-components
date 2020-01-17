@@ -1,6 +1,3 @@
-import { ErrorObject } from 'ajv';
-import { StructureError, Data } from './interfaces';
-export declare const formatStructureErrors: (componentType: string, componentName: string, errors: ErrorObject[] | null | undefined) => StructureError[];
 interface ErrorComponentData {
     type: string;
     name: string;
@@ -15,7 +12,7 @@ interface ErrorData {
     desktop: number;
     component: ErrorContainer;
 }
-interface ErrorLineTemplate {
+export interface ErrorLineTemplate {
     data: ErrorData;
 }
 interface ErrorTemplateRoot {
@@ -23,15 +20,17 @@ interface ErrorTemplateRoot {
     type: string;
     items: ErrorLineTemplate[][];
 }
-interface ErrorTemplate {
+export interface ErrorTemplate {
     version: number;
     name: string;
     type?: string;
     title: string;
     root: ErrorTemplateRoot;
 }
-export declare const getErrorsStructureAndData: (errors: StructureError[]) => {
-    structure: ErrorTemplate;
-    data: Data;
-};
+export interface StructureError {
+    name: string;
+    component: string;
+    message: string;
+    schemaPath?: string;
+}
 export {};

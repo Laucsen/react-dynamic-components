@@ -1,8 +1,8 @@
 import Ajv from 'ajv';
 
-import { Store, State, GetChildren, StructureBase, StructureError, DataConfig } from './interfaces';
-import { createElement } from './wrappers';
-import { formatStructureErrors } from './errors';
+import { Store, State, GetChildren, StructureBase, DataConfig } from './interfaces';
+import { createElement } from '../wrappers';
+import { formatStructureErrors, StructureError } from '../errors';
 
 const isRoot = (structure: any) => {
   return structure.type === undefined && structure.root !== undefined;

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import createStore from './createStore';
-import { createContextConsumer } from './wrappers';
+import { createContextConsumer } from '../wrappers';
 import { GetChildren } from './interfaces';
 
 const globalStore = createStore();
