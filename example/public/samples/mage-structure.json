@@ -23,7 +23,8 @@
 							"components": [
 								{
 									"type": "Text",
-									"name": "text-a"
+									"name": "text-a",
+									"typography": "h1"
 								}
 							]
 						}
@@ -42,7 +43,8 @@
 							"components": [
 								{
 									"type": "Text",
-									"name": "text-b"
+									"name": "text-b",
+									"typography": "h3"
 								}
 							]
 						}
@@ -61,7 +63,8 @@
 							"components": [
 								{
 									"type": "Text",
-									"name": "text-c"
+									"name": "text-c",
+									"typography": "h6"
 								}
 							]
 						}

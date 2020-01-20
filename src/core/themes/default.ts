@@ -1,6 +1,17 @@
+import { createGlobalStyle } from 'styled-components';
+
 import { RdcTheme } from './interfaces';
 
+const GlobalStyles = createGlobalStyle`
+  @import url(https://fonts.googleapis.com/css?family=Josefin+Slab&display=swap);
+  body {
+		font-family: 'Josefin Slab', serif;
+		font-size: 16px;
+  }
+`;
+
 const theme: RdcTheme = {
+  global: GlobalStyles,
   colors: {
     'c-1': '#75DDDD',
     'c-2': '#508991',

@@ -41,7 +41,12 @@ const Core: React.FC<CoreProps> = ({ structure: structureStr, data: dataStr, sto
     return null;
   }
 
-  return <ThemeProvider theme={theme}>{store.build(state.structure, state.data)}</ThemeProvider>;
+  return (
+    <>
+      <theme.global />
+      <ThemeProvider theme={theme}>{store.build(state.structure, state.data)}</ThemeProvider>;
+    </>
+  );
 };
 
 export default connectController(Core);

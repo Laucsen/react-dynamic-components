@@ -1,6 +1,6 @@
 /* eslint-disable */
 import React, { useState, useEffect } from 'react';
-import styled, { ThemeProvider } from 'styled-components';
+import styled, { createGlobalStyle, ThemeProvider } from 'styled-components';
 import Ajv from 'ajv';
 
 /*! *****************************************************************************
@@ -36,6 +36,7 @@ function __makeTemplateObject(cooked, raw) {
 
 var createElement = function (Element, structure, data, rootData) { return (React.createElement(Element, { structure: structure, data: data, rootData: rootData })); };
 var createContextConsumer = function (StoreContext, Component, props) { return (React.createElement(StoreContext.Consumer, null, function (store) { return React.createElement(Component, __assign({}, props, { store: store })); })); };
+//# sourceMappingURL=wrappers.js.map
 
 var formatStructureErrors = function (componentType, componentName, errors) {
     if (!errors) {
@@ -104,6 +105,7 @@ var getErrorsStructureAndData = function (errors) {
         data: data,
     };
 };
+//# sourceMappingURL=errors.js.map
 
 var isRoot = function (structure) {
     return structure.type === undefined && structure.root !== undefined;
@@ -185,6 +187,7 @@ var createStore = function () {
     };
     return { getState: getState, registerComponent: registerComponent, build: build, validateStructure: validateStructure };
 };
+//# sourceMappingURL=createStore.js.map
 
 var globalStore = createStore();
 var StoreContext = React.createContext(globalStore);
@@ -199,8 +202,11 @@ var register = function (componentName, componentStructureSchema, componentDataS
         return consumerBuilder;
     };
 };
+//# sourceMappingURL=store.js.map
 
+var GlobalStyles = createGlobalStyle(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  @import url(https://fonts.googleapis.com/css?family=Josefin+Slab&display=swap);\n  body {\n\t\tfont-family: 'Josefin Slab', serif;\n\t\tfont-size: 16px;\n  }\n"], ["\n  @import url(https://fonts.googleapis.com/css?family=Josefin+Slab&display=swap);\n  body {\n\t\tfont-family: 'Josefin Slab', serif;\n\t\tfont-size: 16px;\n  }\n"])));
 var theme = {
+    global: GlobalStyles,
     colors: {
         'c-1': '#75DDDD',
         'c-2': '#508991',
@@ -209,6 +215,22 @@ var theme = {
         'c-5': '#09BC8A',
     },
 };
+var templateObject_1;
+//# sourceMappingURL=default.js.map
+
+var Typography = {
+    Headings: {
+        h1: styled.h1,
+        h2: styled.h6,
+        h3: styled.h6,
+        h4: styled.h6,
+        h5: styled.h6,
+        h6: styled.h6,
+    },
+};
+//# sourceMappingURL=typography.js.map
+
+//# sourceMappingURL=index.js.map
 
 var Core = function (_a) {
     var structureStr = _a.structure, dataStr = _a.data, store = _a.store;
@@ -242,9 +264,15 @@ var Core = function (_a) {
     if (!state) {
         return null;
     }
-    return React.createElement(ThemeProvider, { theme: theme }, store.build(state.structure, state.data));
+    return (React.createElement(React.Fragment, null,
+        React.createElement(theme.global, null),
+        React.createElement(ThemeProvider, { theme: theme }, store.build(state.structure, state.data)),
+        ";"));
 };
 var Core$1 = connectController(Core);
+//# sourceMappingURL=Core.js.map
+
+//# sourceMappingURL=index.js.map
 
 var getColorFromTheme = function (theme, colorName) {
     if (theme && colorName) {
@@ -285,15 +313,18 @@ var appendDefaultStyles = function (props) {
     }
     return result;
 };
+//# sourceMappingURL=styles.js.map
 
-var Container = styled.div(templateObject_1 || (templateObject_1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
-var templateObject_1;
+var Container = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  ", "\n"], ["\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
+var templateObject_1$1;
+//# sourceMappingURL=styles.js.map
 
 var RootContainer = function (_a) {
     var structure = _a.structure, store = _a.store, rootData = _a.rootData;
     var styles = useDefaultStyles(structure);
     return React.createElement(Container, __assign({}, styles), store.build(structure.root, rootData));
 };
+//# sourceMappingURL=RootContainer.js.map
 
 var RootStructure = {
     properties: {
@@ -310,20 +341,24 @@ var RootStructure = {
     },
     required: ['version', 'name', 'title', 'root'],
 };
+//# sourceMappingURL=structure.js.map
 
 var childrens = (function (structure) {
     return [structure.root];
 });
+//# sourceMappingURL=childrens.js.map
 
 var RootContainer$1 = register('RootContainer', RootStructure, null, childrens)(RootContainer);
+//# sourceMappingURL=index.js.map
 
 // Compute the size of a column and return a CSS width line.
 var getWidthGrid = function (value) {
     var width = (value / 12) * 100;
     return "width: " + width + "%;";
 };
+//# sourceMappingURL=utils.js.map
 
-var Column = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTemplateObject(["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"], ["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"])), function (_a) {
+var Column = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"], ["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"])), function (_a) {
     var mobile = _a.mobile;
     return mobile && getWidthGrid(mobile);
 }, function (_a) {
@@ -333,13 +368,16 @@ var Column = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTempla
     var desktop = _a.desktop;
     return desktop && getWidthGrid(desktop);
 });
-var templateObject_1$1;
-
-var Row = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
 var templateObject_1$2;
+//# sourceMappingURL=Column.js.map
 
-var GridArea = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
+var Row = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
 var templateObject_1$3;
+//# sourceMappingURL=Row.js.map
+
+var GridArea = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
+var templateObject_1$4;
+//# sourceMappingURL=styles.js.map
 
 var GridContainer = function (_a) {
     var structure = _a.structure, store = _a.store, rootData = _a.rootData;
@@ -351,6 +389,7 @@ var GridContainer = function (_a) {
         })));
     })));
 };
+//# sourceMappingURL=Grid.js.map
 
 var GridStructure = {
     properties: {
@@ -387,6 +426,7 @@ var GridStructure = {
     },
     required: ['type', 'name', 'items'],
 };
+//# sourceMappingURL=structure.js.map
 
 var childrens$1 = (function (structure) {
     var mapped = structure.items
@@ -399,11 +439,14 @@ var childrens$1 = (function (structure) {
     });
     return mapped;
 });
+//# sourceMappingURL=childrens.js.map
 
 var Grid = register('Grid', GridStructure, null, childrens$1)(GridContainer);
+//# sourceMappingURL=index.js.map
 
-var ContainerStyled = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  display: flex;\n\n  padding: 8px;\n\n  ", "\n"], ["\n  display: flex;\n\n  padding: 8px;\n\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
-var templateObject_1$4;
+var ContainerStyled = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  display: flex;\n\n  padding: 8px;\n\n  ", "\n"], ["\n  display: flex;\n\n  padding: 8px;\n\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
+var templateObject_1$5;
+//# sourceMappingURL=styles.js.map
 
 var Container$1 = function (_a) {
     var store = _a.store, structure = _a.structure, rootData = _a.rootData;
@@ -412,6 +455,7 @@ var Container$1 = function (_a) {
         return React.createElement(React.Fragment, { key: index }, store.build(component, rootData));
     })));
 };
+//# sourceMappingURL=Container.js.map
 
 var ContainerStructure = {
     properties: {
@@ -426,29 +470,46 @@ var ContainerStructure = {
     },
     required: ['type', 'components'],
 };
+//# sourceMappingURL=structure.js.map
 
 var childrens$2 = (function (structure) {
     return structure.components;
 });
+//# sourceMappingURL=childrens.js.map
 
 var Container$2 = register('Container', ContainerStructure, null, childrens$2)(Container$1);
+//# sourceMappingURL=index.js.map
 
-var TextContainer = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  padding: 8px;\n"], ["\n  padding: 8px;\n"])));
-var Text = function (_a) {
-    var data = _a.data;
-    return React.createElement(TextContainer, null, data);
+var TextContainer = styled.div(templateObject_1$6 || (templateObject_1$6 = __makeTemplateObject(["\n  padding: 8px;\n"], ["\n  padding: 8px;\n"])));
+var StyledText = function (props) {
+    var typo = Typography.Headings[props.typography];
+    if (!typo) {
+        return React.createElement(TextContainer, __assign({}, props));
+    }
+    var TypoTemplate = typo(templateObject_2 || (templateObject_2 = __makeTemplateObject([""], [""])));
+    return React.createElement(TypoTemplate, __assign({}, props));
 };
-var templateObject_1$5;
+var Text = function (_a) {
+    var structure = _a.structure, data = _a.data;
+    return React.createElement(StyledText, { typography: structure.typography }, data);
+};
+var templateObject_1$6, templateObject_2;
 
 var TextStructure = {
     properties: {
         type: { type: 'string' },
         name: { type: 'string' },
+        typography: {
+            type: 'string',
+            enum: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
+        },
     },
     required: ['type', 'name'],
 };
+//# sourceMappingURL=structure.js.map
 
 var Text$1 = register('Text', TextStructure)(Text);
+//# sourceMappingURL=index.js.map
 
 export default Core$1;
 export { Column, Container$2 as Container, Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register, useDefaultStyles };
