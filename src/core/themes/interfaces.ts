@@ -4,9 +4,14 @@ interface RdcThemeColorIndex {
   [index: string]: string;
 }
 
+interface ZIndexIndex {
+  [index: string]: string;
+}
+
 export interface RdcTheme {
   global: GlobalStyleComponent<{}, DefaultTheme>;
   colors: RdcThemeColorIndex;
+  zIndex: ZIndexIndex;
 }
 
 // Typography

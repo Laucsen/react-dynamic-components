@@ -6,7 +6,8 @@
 		"name": "mage-main-grid",
 		"type": "Grid",
 		"background": {
-			"image": "images/crystal-background.jpg"
+			"image": "images/crystal-background.jpg",
+			"gradient": "c-4"
 		},
 		"items": [
 			[

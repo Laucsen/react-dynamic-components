@@ -214,6 +214,10 @@ var theme = {
         'c-4': '#004346',
         'c-5': '#09BC8A',
     },
+    zIndex: {
+        base: '0',
+        content: '1',
+    },
 };
 var templateObject_1;
 //# sourceMappingURL=default.js.map
@@ -319,10 +323,32 @@ var Container = styled.div(templateObject_1$1 || (templateObject_1$1 = __makeTem
 var templateObject_1$1;
 //# sourceMappingURL=styles.js.map
 
+var ContentContainer = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  z-index: ", ";\n"], ["\n  z-index: ", ";\n"])), theme.zIndex.content);
+var templateObject_1$2;
+//# sourceMappingURL=ContentContainer.js.map
+
+var extractColor = function (color) {
+    if (!color) {
+        return null;
+    }
+    var tc = theme.colors[color];
+    if (tc) {
+        return tc;
+    }
+    return color;
+};
+var GradientContainer = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n\n  z-index: ", ";\n\n  background: rgb(210, 210, 210);\n  background: linear-gradient(\n    150deg,\n    ", " 0%,\n    ", " 20%,\n    rgba(0, 212, 255, 0) 100%\n  );\n"], ["\n  position: absolute;\n  left: 0;\n  right: 0;\n  top: 0;\n  bottom: 0;\n\n  z-index: ", ";\n\n  background: rgb(210, 210, 210);\n  background: linear-gradient(\n    150deg,\n    ", " 0%,\n    ", " 20%,\n    rgba(0, 212, 255, 0) 100%\n  );\n"])), theme.zIndex.base, function (props) { return extractColor(props.color); }, function (props) { return extractColor(props.color); });
+var templateObject_1$3;
+//# sourceMappingURL=GradientContainer.js.map
+
 var RootContainer = function (_a) {
     var structure = _a.structure, store = _a.store, rootData = _a.rootData;
     var styles = useDefaultStyles(structure);
-    return React.createElement(Container, __assign({}, styles), store.build(structure.root, rootData));
+    return (React.createElement(React.Fragment, null,
+        structure.background && structure.background.gradient && (React.createElement(GradientContainer, { color: structure.background.gradient })),
+        React.createElement(ContentContainer, null,
+            React.createElement(Container, __assign({}, styles), store.build(structure.root, rootData)),
+            ";")));
 };
 //# sourceMappingURL=RootContainer.js.map
 
@@ -333,12 +359,16 @@ var RootStructure = {
         title: { type: 'string' },
         background: {
             type: 'object',
+            additionalProperties: false,
             properties: {
                 color: { type: 'string' },
+                image: { type: 'string' },
+                gradient: { type: 'string' },
             },
         },
         root: { tyoe: 'object' },
     },
+    additionalProperties: false,
     required: ['version', 'name', 'title', 'root'],
 };
 //# sourceMappingURL=structure.js.map
@@ -358,7 +388,7 @@ var getWidthGrid = function (value) {
 };
 //# sourceMappingURL=utils.js.map
 
-var Column = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTemplateObject(["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"], ["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"])), function (_a) {
+var Column = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"], ["\n  float: left;\n  padding: 0.25rem;\n  min-height: 1px;\n  box-sizing: border-box;\n  width: 100%;\n\n  @media only screen and (max-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 768px) {\n    ", "\n  }\n\n  @media only screen and (min-width: 1000px) {\n    ", "\n  }\n"])), function (_a) {
     var mobile = _a.mobile;
     return mobile && getWidthGrid(mobile);
 }, function (_a) {
@@ -368,28 +398,28 @@ var Column = styled.div(templateObject_1$2 || (templateObject_1$2 = __makeTempla
     var desktop = _a.desktop;
     return desktop && getWidthGrid(desktop);
 });
-var templateObject_1$2;
+var templateObject_1$4;
 //# sourceMappingURL=Column.js.map
 
-var Row = styled.div(templateObject_1$3 || (templateObject_1$3 = __makeTemplateObject(["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
-var templateObject_1$3;
+var Row = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"], ["\n  width: 100%;\n  height: auto;\n  float: left;\n  box-sizing: border-box;\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n"])));
+var templateObject_1$5;
 //# sourceMappingURL=Row.js.map
 
-var GridArea = styled.div(templateObject_1$4 || (templateObject_1$4 = __makeTemplateObject(["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"], ["\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
-var templateObject_1$4;
-//# sourceMappingURL=styles.js.map
+var GridArea = styled.div(templateObject_1$6 || (templateObject_1$6 = __makeTemplateObject(["\n  position: relative;\n\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"], ["\n  position: relative;\n\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
+var templateObject_1$6;
 
 var GridContainer = function (_a) {
     var structure = _a.structure, store = _a.store, rootData = _a.rootData;
     var styles = useDefaultStyles(structure);
-    return (React.createElement(GridArea, __assign({ "data-rdc-name": structure.name }, styles), structure.items.map(function (row, ri) {
-        return (React.createElement(Row, { key: ri }, row.map(function (column, ci) {
-            var _a = column.data, mobile = _a.mobile, tablet = _a.tablet, desktop = _a.desktop, component = _a.component;
-            return (React.createElement(Column, { mobile: mobile, tablet: tablet, desktop: desktop, key: ci }, store.build(component, rootData)));
-        })));
-    })));
+    return (React.createElement(GridArea, __assign({ "data-rdc-name": structure.name }, styles),
+        structure.background && structure.background.gradient && (React.createElement(GradientContainer, { color: structure.background.gradient })),
+        React.createElement(ContentContainer, null, structure.items.map(function (row, ri) {
+            return (React.createElement(Row, { key: ri }, row.map(function (column, ci) {
+                var _a = column.data, mobile = _a.mobile, tablet = _a.tablet, desktop = _a.desktop, component = _a.component;
+                return (React.createElement(Column, { mobile: mobile, tablet: tablet, desktop: desktop, key: ci }, store.build(component, rootData)));
+            })));
+        }))));
 };
-//# sourceMappingURL=Grid.js.map
 
 var GridStructure = {
     properties: {
@@ -397,8 +427,11 @@ var GridStructure = {
         name: { type: 'string' },
         background: {
             type: 'object',
+            additionalProperties: false,
             properties: {
                 color: { type: 'string' },
+                image: { type: 'string' },
+                gradient: { type: 'string' },
             },
         },
         items: {
@@ -424,6 +457,7 @@ var GridStructure = {
             },
         },
     },
+    additionalProperties: false,
     required: ['type', 'name', 'items'],
 };
 //# sourceMappingURL=structure.js.map
@@ -444,16 +478,18 @@ var childrens$1 = (function (structure) {
 var Grid = register('Grid', GridStructure, null, childrens$1)(GridContainer);
 //# sourceMappingURL=index.js.map
 
-var ContainerStyled = styled.div(templateObject_1$5 || (templateObject_1$5 = __makeTemplateObject(["\n  display: flex;\n\n  padding: 8px;\n\n  ", "\n"], ["\n  display: flex;\n\n  padding: 8px;\n\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
-var templateObject_1$5;
+var ContainerStyled = styled.div(templateObject_1$7 || (templateObject_1$7 = __makeTemplateObject(["\n  position: relative;\n  display: flex;\n\n  padding: 8px;\n\n  ", "\n"], ["\n  position: relative;\n  display: flex;\n\n  padding: 8px;\n\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
+var templateObject_1$7;
 //# sourceMappingURL=styles.js.map
 
 var Container$1 = function (_a) {
     var store = _a.store, structure = _a.structure, rootData = _a.rootData;
     var styles = useDefaultStyles(structure);
-    return (React.createElement(ContainerStyled, __assign({}, styles), structure.components.map(function (component, index) {
-        return React.createElement(React.Fragment, { key: index }, store.build(component, rootData));
-    })));
+    return (React.createElement(ContainerStyled, __assign({}, styles),
+        structure.background && structure.background.gradient && (React.createElement(GradientContainer, { color: structure.background.gradient })),
+        structure.components.map(function (component, index) {
+            return React.createElement(ContentContainer, { key: index }, store.build(component, rootData));
+        })));
 };
 //# sourceMappingURL=Container.js.map
 
@@ -461,6 +497,15 @@ var ContainerStructure = {
     properties: {
         type: { type: 'string' },
         name: { type: 'string' },
+        background: {
+            type: 'object',
+            additionalProperties: false,
+            properties: {
+                color: { type: 'string' },
+                image: { type: 'string' },
+                gradient: { type: 'string' },
+            },
+        },
         components: {
             type: 'array',
             items: {
@@ -468,6 +513,7 @@ var ContainerStructure = {
             },
         },
     },
+    additionalProperties: false,
     required: ['type', 'components'],
 };
 //# sourceMappingURL=structure.js.map
@@ -480,7 +526,7 @@ var childrens$2 = (function (structure) {
 var Container$2 = register('Container', ContainerStructure, null, childrens$2)(Container$1);
 //# sourceMappingURL=index.js.map
 
-var TextContainer = styled.div(templateObject_1$6 || (templateObject_1$6 = __makeTemplateObject(["\n  padding: 8px;\n"], ["\n  padding: 8px;\n"])));
+var TextContainer = styled.div(templateObject_1$8 || (templateObject_1$8 = __makeTemplateObject(["\n  padding: 8px;\n"], ["\n  padding: 8px;\n"])));
 var StyledText = function (props) {
     var typo = Typography.Headings[props.typography];
     if (!typo) {
@@ -493,7 +539,8 @@ var Text = function (_a) {
     var structure = _a.structure, data = _a.data;
     return React.createElement(StyledText, { typography: structure.typography }, data);
 };
-var templateObject_1$6, templateObject_2;
+var templateObject_1$8, templateObject_2;
+//# sourceMappingURL=Text.js.map
 
 var TextStructure = {
     properties: {

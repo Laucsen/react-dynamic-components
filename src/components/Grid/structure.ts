@@ -4,8 +4,11 @@ export default {
     name: { type: 'string' },
     background: {
       type: 'object',
+      additionalProperties: false,
       properties: {
         color: { type: 'string' },
+        image: { type: 'string' },
+        gradient: { type: 'string' },
       },
     },
     items: {
@@ -31,5 +34,6 @@ export default {
       },
     },
   },
+  additionalProperties: false,
   required: ['type', 'name', 'items'],
 };

@@ -8,8 +8,15 @@ declare const _default: {
         };
         background: {
             type: string;
+            additionalProperties: boolean;
             properties: {
                 color: {
+                    type: string;
+                };
+                image: {
+                    type: string;
+                };
+                gradient: {
                     type: string;
                 };
             };
@@ -45,6 +52,7 @@ declare const _default: {
             };
         };
     };
+    additionalProperties: boolean;
     required: string[];
 };
 export default _default;

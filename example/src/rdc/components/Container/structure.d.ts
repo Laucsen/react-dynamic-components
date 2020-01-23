@@ -6,6 +6,21 @@ declare const _default: {
         name: {
             type: string;
         };
+        background: {
+            type: string;
+            additionalProperties: boolean;
+            properties: {
+                color: {
+                    type: string;
+                };
+                image: {
+                    type: string;
+                };
+                gradient: {
+                    type: string;
+                };
+            };
+        };
         components: {
             type: string;
             items: {
@@ -13,6 +28,7 @@ declare const _default: {
             };
         };
     };
+    additionalProperties: boolean;
     required: string[];
 };
 export default _default;

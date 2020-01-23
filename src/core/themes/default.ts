@@ -19,5 +19,9 @@ const theme: RdcTheme = {
     'c-4': '#004346',
     'c-5': '#09BC8A',
   },
+  zIndex: {
+    base: '0',
+    content: '1',
+  },
 };
 export default theme;
