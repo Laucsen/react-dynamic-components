@@ -44,6 +44,7 @@ declare const _default: {
                                     type: string;
                                 };
                             };
+                            additionalProperties: boolean;
                             required: string[];
                         };
                     };

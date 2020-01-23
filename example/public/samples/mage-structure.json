@@ -23,9 +23,8 @@
 							},
 							"components": [
 								{
-									"type": "Text",
-									"name": "text-a",
-									"typography": "h1"
+									"type": "Image",
+									"name": "title-image"
 								}
 							]
 						}

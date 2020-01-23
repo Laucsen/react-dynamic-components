@@ -5,6 +5,7 @@ export { RootContainer } from './components/RootContainer';
 import { Grid, Row, Column } from './components/Grid';
 import { Container } from './components/Container';
 import { Text } from './components/Text';
+import { Image } from './components/Image';
 
 export {
   // Core
@@ -25,4 +26,5 @@ export {
   Column,
   Container,
   Text,
+  Image,
 };

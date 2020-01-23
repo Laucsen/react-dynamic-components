@@ -6,10 +6,6 @@ declare const _default: {
         name: {
             type: string;
         };
-        typography: {
-            type: string;
-            enum: string[];
-        };
     };
     additionalProperties: boolean;
     required: string[];

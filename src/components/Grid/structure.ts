@@ -26,6 +26,7 @@ export default {
                 desktop: { type: 'number' },
                 component: { type: 'object' },
               },
+              additionalProperties: false,
               required: ['mobile', 'tablet', 'desktop', 'component'],
             },
           },

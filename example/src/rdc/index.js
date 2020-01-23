@@ -407,6 +407,7 @@ var templateObject_1$5;
 
 var GridArea = styled.div(templateObject_1$6 || (templateObject_1$6 = __makeTemplateObject(["\n  position: relative;\n\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"], ["\n  position: relative;\n\n  max-width: 1360px;\n  padding-right: 15px;\n  padding-left: 15px;\n  padding-top: 16px;\n  padding-bottom: 32px;\n  margin-right: auto;\n  margin-left: auto;\n  box-sizing: border-box;\n\n  &:before,\n  &:after {\n    content: ' ';\n    display: table;\n  }\n  &:after {\n    clear: both;\n  }\n\n  ", "\n"])), function (props) { return appendDefaultStyles(props); });
 var templateObject_1$6;
+//# sourceMappingURL=styles.js.map
 
 var GridContainer = function (_a) {
     var structure = _a.structure, store = _a.store, rootData = _a.rootData;
@@ -420,6 +421,7 @@ var GridContainer = function (_a) {
             })));
         }))));
 };
+//# sourceMappingURL=Grid.js.map
 
 var GridStructure = {
     properties: {
@@ -449,6 +451,7 @@ var GridStructure = {
                                 desktop: { type: 'number' },
                                 component: { type: 'object' },
                             },
+                            additionalProperties: false,
                             required: ['mobile', 'tablet', 'desktop', 'component'],
                         },
                     },
@@ -551,6 +554,7 @@ var TextStructure = {
             enum: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6'],
         },
     },
+    additionalProperties: false,
     required: ['type', 'name'],
 };
 //# sourceMappingURL=structure.js.map
@@ -558,5 +562,23 @@ var TextStructure = {
 var Text$1 = register('Text', TextStructure)(Text);
 //# sourceMappingURL=index.js.map
 
+var Image = function (_a) {
+    var data = _a.data;
+    return (React.createElement(React.Fragment, null,
+        React.createElement("img", { src: data, alt: "Component Image" })));
+};
+
+var ImageStructure = {
+    properties: {
+        type: { type: 'string' },
+        name: { type: 'string' },
+    },
+    additionalProperties: false,
+    required: ['type', 'name'],
+};
+//# sourceMappingURL=structure.js.map
+
+var Image$1 = register('Image', ImageStructure)(Image);
+
 export default Core$1;
-export { Column, Container$2 as Container, Grid, RootContainer$1 as RootContainer, Row, Text$1 as Text, register, useDefaultStyles };
+export { Column, Container$2 as Container, Grid, Image$1 as Image, RootContainer$1 as RootContainer, Row, Text$1 as Text, register, useDefaultStyles };
