@@ -1,13 +1,10 @@
-import React from 'react';
+import { createContextConsumer, createContext } from '../wrappers';
 
 import createStore from './createStore';
-import { createContextConsumer } from '../wrappers';
 import { GetChildren } from './interfaces';
-import console = require('console');
 
-console.log('===> Creating Store');
 const globalStore = createStore();
-const StoreContext = React.createContext(globalStore);
+const StoreContext = createContext(globalStore);
 
 const connectController = (Component: any) => (props: any) => createContextConsumer(StoreContext, Component, props);
 
@@ -17,7 +14,6 @@ const register = (
   componentDataSchema: any | null = null,
   compoentChildrens: GetChildren = () => null,
 ) => (Component: any) => {
-  console.log('---> registering');
   const consumerBuilder = (props: any) => createContextConsumer(StoreContext, Component, props);
   globalStore.registerComponent(
     componentName,

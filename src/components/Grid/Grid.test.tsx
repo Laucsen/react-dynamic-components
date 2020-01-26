@@ -32,9 +32,11 @@ const data = {
   data: {},
 };
 
+const build = () => mount(<RDC structure={structure} data={data} />);
+
 describe('<Grid />', () => {
   it('renders a Container with sub elements', () => {
-    const Wrapper = mount(<RDC structure={structure} data={data} />);
+    const Wrapper = build();
 
     console.log(Wrapper.html());
 

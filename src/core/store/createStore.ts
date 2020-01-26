@@ -30,6 +30,11 @@ const createStore = (): Store => {
     childrens: {},
   };
 
+  const init = () => {
+    // TODO
+    console.log('INIT');
+  };
+
   const getState = () => Object.freeze({ ...state });
 
   const registerComponent = (
@@ -113,7 +118,7 @@ const createStore = (): Store => {
     return [];
   };
 
-  return { getState, registerComponent, build, validateStructure };
+  return { init, getState, registerComponent, build, validateStructure };
 };
 
 export default createStore;
