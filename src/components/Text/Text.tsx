@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { TextProps, StyledTextProps } from './interfaces';
 
-import { Typography } from '../../Core/themes';
+import { Typography } from '../../core/themes';
 
 const TextContainer = styled.div`
   padding: 8px;
@@ -21,7 +21,11 @@ const StyledText = (props: StyledTextProps) => {
 };
 
 const Text: React.FC<TextProps> = ({ structure, data }) => {
-  return <StyledText typography={structure.typography}>{data}</StyledText>;
+  return (
+    <StyledText data-name={structure.name} typography={structure.typography}>
+      {data}
+    </StyledText>
+  );
 };
 
 export default Text;

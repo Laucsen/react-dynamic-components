@@ -1,6 +1,6 @@
 import React from 'react';
 
-import RDC from './rdc';
+import * as RDC from './rdc';
 
 import { useRdcState } from './utils';
 
@@ -13,7 +13,7 @@ const App = () => {
     return null;
   }
 
-  return <RDC structure={structure} data={data} />;
+  return <RDC.Core structure={structure} data={data} />;
 };
 
 export default App;

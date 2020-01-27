@@ -1,5 +1,5 @@
 import { Store, StructureBase, DefaultConfigStyles } from '../..';
-import { DataConfig } from '../../Core/store';
+import { DataConfig } from '../../core/store';
 
 export interface ColumnProps {
   mobile: number;

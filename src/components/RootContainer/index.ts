@@ -1,4 +1,4 @@
-import { register } from '../..';
+import { register } from '../../core';
 
 import RootContainerSource from './RootContainer';
 import RootStructure from './structure';

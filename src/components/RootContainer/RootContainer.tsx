@@ -3,7 +3,7 @@ import React from 'react';
 import { RootContainerProps } from './interfaces';
 import { Container } from './styles';
 
-import { useDefaultStyles } from '../..';
+import { useDefaultStyles } from '../../utils';
 import { GradientContainer, ContentContainer } from '../../shared';
 
 const RootContainer: React.FC<RootContainerProps> = ({ structure, store, rootData }) => {

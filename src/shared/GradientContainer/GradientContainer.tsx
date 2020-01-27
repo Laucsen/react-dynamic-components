@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import theme from '../../Core/themes';
+import theme from '../../core/themes';
 
 const extractColor = (color?: string) => {
   if (!color) {

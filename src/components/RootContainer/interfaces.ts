@@ -1,5 +1,6 @@
-import { Store, DefaultConfigStyles, StructureBase } from '../..';
-import { DataConfig } from '../../Core/store';
+import { Store, StructureBase } from '../../core';
+import { DataConfig } from '../../core/store';
+import { DefaultConfigStyles } from '../../utils';
 
 export interface RootContainerStructure extends DefaultConfigStyles {
   root: StructureBase;

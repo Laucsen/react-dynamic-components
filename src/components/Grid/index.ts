@@ -1,4 +1,4 @@
-import { register } from '../..';
+import { register } from '../../core';
 
 import Column from './Column';
 import Row from './Row';

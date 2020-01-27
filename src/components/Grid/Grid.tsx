@@ -7,7 +7,7 @@ import { GridProps } from './interfaces';
 import Row from './Row';
 import Column from './Column';
 
-import { useDefaultStyles } from '../..';
+import { useDefaultStyles } from '../../utils';
 import { GradientContainer, ContentContainer } from '../../shared';
 
 const GridContainer: React.FC<GridProps> = ({ structure, store, rootData }) => {

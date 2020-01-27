@@ -12,10 +12,6 @@ const Core: React.FC<CoreProps> = ({ structure: structureStr, data: dataStr, sto
   const [errors, setErrors] = useState<StructureError[] | null>(null);
 
   useEffect(() => {
-    store.init();
-  }, []);
-
-  useEffect(() => {
     try {
       const parsedInfo = {
         structure: JSON.parse(structureStr),

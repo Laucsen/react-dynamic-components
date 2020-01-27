@@ -1,4 +1,4 @@
-import { RdcTheme } from '../Core/themes/interfaces';
+import { RdcTheme } from '../core/themes/interfaces';
 import { StyledBackgrond, RdcStyledProps } from '../core/styles/interfaces';
 
 import { DefaultConfigStyles } from './interfaces';

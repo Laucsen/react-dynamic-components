@@ -40,7 +40,6 @@ export interface DataConfig {
 }
 
 export interface Store {
-  init: () => void;
   getState: () => State;
   registerComponent: (
     name: string,

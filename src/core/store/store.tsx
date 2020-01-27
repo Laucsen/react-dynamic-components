@@ -1,12 +1,15 @@
-import { createContextConsumer, createContext } from '../wrappers';
+import { createContext } from 'react';
+import { createContextConsumer } from '../wrappers';
 
 import createStore from './createStore';
 import { GetChildren } from './interfaces';
 
 const globalStore = createStore();
-const StoreContext = createContext(globalStore);
+const CurrentContext = createContext(globalStore);
 
-const connectController = (Component: any) => (props: any) => createContextConsumer(StoreContext, Component, props);
+const connectController = (Component: any) => (props: any) => {
+  return createContextConsumer(CurrentContext, Component, props);
+};
 
 const register = (
   componentName: string,
@@ -14,7 +17,7 @@ const register = (
   componentDataSchema: any | null = null,
   compoentChildrens: GetChildren = () => null,
 ) => (Component: any) => {
-  const consumerBuilder = (props: any) => createContextConsumer(StoreContext, Component, props);
+  const consumerBuilder = (props: any) => createContextConsumer(CurrentContext, Component, props);
   globalStore.registerComponent(
     componentName,
     consumerBuilder,

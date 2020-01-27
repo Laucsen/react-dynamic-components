@@ -1,12 +1,12 @@
-import React from 'react';
+import React, { Context } from 'react';
 import { Store } from './store';
 
-export const createElement = (Element: any, structure: object, data: any, rootData: object) => (
+export const createElementWithProps = (Element: any, structure: object, data: any, rootData: object) => (
   <Element structure={structure} data={data} rootData={rootData} />
 );
 
-export const createContextConsumer = (StoreContext: any, Component: any, props: any) => (
-  <StoreContext.Consumer>{(store: Store) => <Component {...props} store={store} />}</StoreContext.Consumer>
-);
-
-export const createContext = (globalStore: Store) => React.createContext(globalStore);
+export const createContextConsumer = (ContextElement: Context<Store>, WrappedComponent: any, props: any) => {
+  return (
+    <ContextElement.Consumer>{(store: Store) => <WrappedComponent {...props} store={store} />}</ContextElement.Consumer>
+  );
+};

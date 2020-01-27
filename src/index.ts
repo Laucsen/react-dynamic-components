@@ -1,4 +1,4 @@
-import Core, { register, Store, Data, StructureBase, RdcTheme, StyledBackgrond } from './Core';
+import CoreComponent, { register, Store, Data, StructureBase, RdcTheme, StyledBackgrond } from './core';
 import { DefaultConfigStyles, useDefaultStyles } from './utils';
 
 export { RootContainer } from './components/RootContainer';
@@ -9,7 +9,7 @@ import { Image } from './components/Image';
 
 export {
   // Core
-  Core as default,
+  CoreComponent as Core,
   register,
   // Utils
   useDefaultStyles,

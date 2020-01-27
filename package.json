@@ -60,7 +60,7 @@
     "pretest": "yarn build",
     "test": "yarn test:only",
     "test:only": "jest",
-    "test:watch": "jest --watch --env=jsdom",
+    "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
     "test:lint": "eslint ./src/**/*.ts ./src/**/*.tsx ./example/src/**/*.ts ./example/src/**/*.tsx",
     "test:lint:fix": "yarn test:lint -- --fix"

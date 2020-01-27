@@ -1,5 +1,5 @@
 import { Store, DefaultConfigStyles, StructureBase } from '../..';
-import { DataConfig } from '../../Core/store';
+import { DataConfig } from '../../core/store';
 
 export interface ContainerStrucutre extends DefaultConfigStyles {
   name?: string;

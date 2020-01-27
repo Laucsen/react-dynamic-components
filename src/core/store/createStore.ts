@@ -1,7 +1,7 @@
 import Ajv from 'ajv';
 
 import { Store, State, GetChildren, StructureBase, DataConfig } from './interfaces';
-import { createElement } from '../wrappers';
+import { createElementWithProps } from '../wrappers';
 import { formatStructureErrors, StructureError } from '../errors';
 
 const isRoot = (structure: any) => {
@@ -30,11 +30,6 @@ const createStore = (): Store => {
     childrens: {},
   };
 
-  const init = () => {
-    // TODO
-    console.log('INIT');
-  };
-
   const getState = () => Object.freeze({ ...state });
 
   const registerComponent = (
@@ -54,7 +49,7 @@ const createStore = (): Store => {
     const type = getComponentTypeFromStructure(structure);
     const currentData = data.data[structure.name];
     const Element = state.components[type];
-    return createElement(Element, structure, currentData, data);
+    return createElementWithProps(Element, structure, currentData, data);
   };
 
   interface StructureAnalysis {
@@ -118,7 +113,7 @@ const createStore = (): Store => {
     return [];
   };
 
-  return { init, getState, registerComponent, build, validateStructure };
+  return { getState, registerComponent, build, validateStructure };
 };
 
 export default createStore;

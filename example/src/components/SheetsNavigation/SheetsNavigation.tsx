@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import RDC from '../../rdc';
+import * as RDC from '../../rdc';
 import { useRdcState } from '../../utils';
 
 import { SheetsNavigationProps } from './interfaces';
@@ -25,7 +25,7 @@ const SheetsNavigation: React.FC<SheetsNavigationProps> = () => {
         <button>Mage</button>
         <button disabled>DeD 5.0</button>
       </ButtonsContainer>
-      <RDC structure={structure} data={data} />
+      <RDC.Core structure={structure} data={data} />
     </div>
   );
 };

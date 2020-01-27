@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import { mount } from 'enzyme';
 
-import RDC from '../../';
+import { Core } from '../../';
 
 const structure = {
   version: 1,
@@ -18,7 +18,8 @@ const structure = {
             tablet: 12,
             desktop: 12,
             component: {
-              type: 'dummy',
+              type: 'Text',
+              name: 'text-a',
             },
           },
         },
@@ -29,17 +30,21 @@ const structure = {
 
 const data = {
   version: 1,
-  data: {},
+  data: {
+    'text-a': 'Yes',
+  },
 };
 
-const build = () => mount(<RDC structure={structure} data={data} />);
+const build = () => mount(<Core structure={JSON.stringify(structure)} data={JSON.stringify(data)} />);
 
 describe('<Grid />', () => {
   it('renders a Container with sub elements', () => {
     const Wrapper = build();
 
-    console.log(Wrapper.html());
-
-    expect(true).toBeTruthy();
+    expect(
+      Wrapper.find('[data-name="text-a"]')
+        .first()
+        .text(),
+    ).toBe('Yes');
   });
 });

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import ReactJson from 'react-json-view';
 
-import RDC from '../../rdc';
+import * as RDC from '../../rdc';
 import { useRdcState } from '../../utils';
 
 import { SheetProps } from './interfaces';
@@ -23,7 +23,7 @@ const Sheets: React.FC<SheetProps> = ({ data: incommingData }) => {
 
   return (
     <div>
-      <RDC structure={structure} data={data} />
+      <RDC.Core structure={structure} data={data} />
       <ReactJson src={JSON.parse(structure)} onEdit={edit => setStructure(JSON.stringify(edit.updated_src))} />;
       <ReactJson src={JSON.parse(data)} onEdit={edit => setData(JSON.stringify(edit.updated_src))} />;
     </div>
