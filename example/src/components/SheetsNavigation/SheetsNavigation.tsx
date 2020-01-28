@@ -6,6 +6,8 @@ import { useRdcState } from '../../utils';
 
 import { SheetsNavigationProps } from './interfaces';
 
+import { PUBLIC_URL } from '../../api';
+
 const ButtonsContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -13,7 +15,10 @@ const ButtonsContainer = styled.div`
 `;
 
 const SheetsNavigation: React.FC<SheetsNavigationProps> = () => {
-  const { structure, data } = useRdcState('/samples/navigation-structure.json', '/samples/navigation-data.json');
+  const { structure, data } = useRdcState(
+    `${PUBLIC_URL}/samples/navigation-structure.json`,
+    `${PUBLIC_URL}/samples/navigation-data.json`,
+  );
   if (!structure || !data) {
     return null;
   }

@@ -7,8 +7,13 @@ import { useRdcState } from './utils';
 import {} from './components/Sheets';
 import {} from './components/SheetsNavigation';
 
+import { PUBLIC_URL } from './api';
+
 const App = () => {
-  const { structure, data } = useRdcState('/samples/base-structure.json', '/samples/base-data.json');
+  const { structure, data } = useRdcState(
+    `${PUBLIC_URL}/samples/base-structure.json`,
+    `${PUBLIC_URL}/samples/base-data.json`,
+  );
   if (!structure || !data) {
     return null;
   }

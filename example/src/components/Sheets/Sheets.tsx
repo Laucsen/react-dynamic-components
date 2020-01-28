@@ -6,6 +6,8 @@ import { useRdcState } from '../../utils';
 
 import { SheetProps } from './interfaces';
 
+import { PUBLIC_URL } from '../../api';
+
 const Sheets: React.FC<SheetProps> = ({ data: incommingData }) => {
   const [type, setType] = useState(incommingData);
   useEffect(() => {
@@ -13,8 +15,8 @@ const Sheets: React.FC<SheetProps> = ({ data: incommingData }) => {
   }, [incommingData]);
 
   const { structure, data, setStructure, setData } = useRdcState(
-    `/samples/${type}-structure.json`,
-    `/samples/${type}-data.json`,
+    `${PUBLIC_URL}/samples/${type}-structure.json`,
+    `${PUBLIC_URL}/samples/${type}-data.json`,
   );
 
   if (!type || !structure || !data) {
@@ -22,11 +24,11 @@ const Sheets: React.FC<SheetProps> = ({ data: incommingData }) => {
   }
 
   return (
-    <div>
+    <>
       <RDC.Core structure={structure} data={data} />
       <ReactJson src={JSON.parse(structure)} onEdit={edit => setStructure(JSON.stringify(edit.updated_src))} />;
       <ReactJson src={JSON.parse(data)} onEdit={edit => setData(JSON.stringify(edit.updated_src))} />;
-    </div>
+    </>
   );
 };
 
