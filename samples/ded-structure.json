@@ -1,0 +1,9 @@
+{
+	"version": 1,
+	"name": "ded-structure",
+	"title": "Ded 5 Sheet Structure",
+	"root": {
+		"name": "ded-title",
+		"type": "Text"
+	}
+}
