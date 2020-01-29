@@ -1,5 +1,11 @@
 import { StructureError } from '../errors';
 
+// Error analysis related
+export interface StructureAnalysis {
+  currentStructure: any;
+  currentType: string;
+}
+
 // State related
 interface ComponentsIndex {
   [index: string]: any;

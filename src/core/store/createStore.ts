@@ -1,6 +1,6 @@
 import Ajv from 'ajv';
 
-import { Store, State, GetChildren, StructureBase, DataConfig } from './interfaces';
+import { Store, State, GetChildren, StructureBase, DataConfig, StructureAnalysis } from './interfaces';
 import { createElementWithProps } from '../wrappers';
 import { formatStructureErrors, StructureError } from '../errors';
 
@@ -39,6 +39,7 @@ const createStore = (): Store => {
     componentDataSchema: any | null = null,
     compoentChildrens: GetChildren = () => null,
   ) => {
+    // Register component
     state.components[name] = component;
     state.structuresSchemas[name] = componentStructureSchema;
     state.dataSchema[name] = componentDataSchema;
@@ -51,11 +52,6 @@ const createStore = (): Store => {
     const Element = state.components[type];
     return createElementWithProps(Element, structure, currentData, data);
   };
-
-  interface StructureAnalysis {
-    currentStructure: any;
-    currentType: string;
-  }
 
   const validateStructure = (structure: any): StructureError[] => {
     const ajv = new Ajv();
