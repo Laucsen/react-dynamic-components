@@ -1,8 +1,9 @@
 import Ajv from 'ajv';
 
-import { Store, State, ComponentOptions, StructureBase, DataConfig, StructureAnalysis } from './interfaces';
-import { createElementWithProps } from '../wrappers';
 import { formatStructureErrors, StructureError } from '../errors';
+import { createElementWithProps } from '../wrappers';
+
+import { Store, State, ComponentOptions, StructureBase, DataConfig, StructureAnalysis } from './interfaces';
 
 const isRoot = (structure: any) => {
   return structure.type === undefined && structure.root !== undefined;
@@ -48,6 +49,8 @@ const createStore = (): Store => {
     state.dataSchema[name] = componentDataSchema;
     if (options) {
       state.childrens[name] = options.childrens || dumnyChildrens;
+    } else {
+      state.childrens[name] = dumnyChildrens;
     }
   };
 
