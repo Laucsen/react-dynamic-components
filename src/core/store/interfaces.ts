@@ -26,6 +26,10 @@ export interface StructureBase {
 
 export type GetChildren = (structure: any) => StructureBase[] | null;
 
+export interface ComponentOptions {
+  childrens?: GetChildren;
+}
+
 interface GetChildrenIndex {
   [index: string]: GetChildren;
 }
@@ -52,7 +56,7 @@ export interface Store {
     component: any,
     structure: any,
     componentDataSchema: any | null,
-    compoentChildrens: GetChildren,
+    options: ComponentOptions | null,
   ) => void;
   build: (structure: StructureBase, data: DataConfig) => any;
   validateStructure: (structur: any) => StructureError[];
