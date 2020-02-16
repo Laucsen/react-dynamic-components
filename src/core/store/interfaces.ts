@@ -58,6 +58,8 @@ export interface Store {
     componentDataSchema: any | null,
     options: ComponentOptions | null,
   ) => void;
-  build: (structure: StructureBase, data: DataConfig) => any;
+  build: (structure: StructureBase) => any;
   validateStructure: (structur: any) => StructureError[];
+  appendDataToContainer: (root: React.ReactElement, rootData: DataConfig | null) => React.ReactElement | null;
+  buildAppendDataToContainer: (structure: StructureBase, rootData: DataConfig | null) => React.ReactElement | null;
 }

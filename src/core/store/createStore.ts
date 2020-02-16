@@ -1,9 +1,9 @@
 import Ajv from 'ajv';
 
 import { formatStructureErrors, StructureError } from '../errors';
-import { createElementWithProps } from '../wrappers';
+import { createElementWithProps, cloneElement } from '../wrappers';
 
-import { Store, State, ComponentOptions, StructureBase, DataConfig, StructureAnalysis } from './interfaces';
+import { Store, State, ComponentOptions, StructureBase, StructureAnalysis, DataConfig } from './interfaces';
 
 const isRoot = (structure: any) => {
   return structure.type === undefined && structure.root !== undefined;
@@ -54,11 +54,10 @@ const createStore = (): Store => {
     }
   };
 
-  const build = (structure: StructureBase, data: DataConfig) => {
+  const build = (structure: StructureBase) => {
     const type = getComponentTypeFromStructure(structure);
-    const currentData = data.data[structure.name];
     const Element = state.components[type];
-    return createElementWithProps(Element, structure, currentData, data);
+    return createElementWithProps(Element, structure);
   };
 
   const validateStructure = (structure: any): StructureError[] => {
@@ -117,7 +116,20 @@ const createStore = (): Store => {
     return [];
   };
 
-  return { getState, registerComponent, build, validateStructure };
+  const appendDataToContainer = (
+    RootElement: React.ReactElement,
+    rootData: DataConfig | null,
+    data: any | null = null,
+  ): React.ReactElement | null => {
+    return cloneElement(RootElement, rootData, data);
+  };
+
+  const buildAppendDataToContainer = (structure: StructureBase, rootData: DataConfig | null) => {
+    const componentData = rootData && rootData.data ? rootData.data[structure.name] : null;
+    return appendDataToContainer(build(structure), rootData, componentData);
+  };
+
+  return { getState, registerComponent, build, validateStructure, appendDataToContainer, buildAppendDataToContainer };
 };
 
 export default createStore;

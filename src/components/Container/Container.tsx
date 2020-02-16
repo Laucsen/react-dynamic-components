@@ -14,7 +14,7 @@ const Container: React.FC<ContainerProps> = ({ store, structure, rootData }) => 
         <GradientContainer color={structure.background.gradient} />
       )}
       {structure.components.map((component: StructureBase, index: number) => {
-        return <ContentContainer key={index}>{store.build(component, rootData)}</ContentContainer>;
+        return <ContentContainer key={index}>{store.buildAppendDataToContainer(component, rootData)}</ContentContainer>;
       })}
     </ContainerStyled>
   );

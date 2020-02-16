@@ -10,4 +10,5 @@ export interface RootContainerProps {
   structure: RootContainerStructure;
   store: Store;
   rootData: DataConfig;
+  data: any;
 }

@@ -25,7 +25,7 @@ const GridContainer: React.FC<GridProps> = ({ structure, store, rootData }) => {
                 const { mobile, tablet, desktop, component } = column.data;
                 return (
                   <Column mobile={mobile} tablet={tablet} desktop={desktop} key={ci}>
-                    {store.build(component, rootData)}
+                    {store.buildAppendDataToContainer(component, rootData)}
                   </Column>
                 );
               })}

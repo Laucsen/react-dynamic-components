@@ -2,7 +2,6 @@ import React from 'react';
 
 import { RootContainerProps } from './interfaces';
 import { Container } from './styles';
-
 import { useDefaultStyles } from '../../utils';
 import { GradientContainer, ContentContainer } from '../../shared';
 
@@ -14,7 +13,7 @@ const RootContainer: React.FC<RootContainerProps> = ({ structure, store, rootDat
         <GradientContainer color={structure.background.gradient} />
       )}
       <ContentContainer>
-        <Container {...styles}>{store.build(structure.root, rootData)}</Container>;
+        <Container {...styles}>{store.buildAppendDataToContainer(structure.root, rootData)}</Container>;
       </ContentContainer>
     </>
   );

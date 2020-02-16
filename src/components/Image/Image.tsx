@@ -10,4 +10,6 @@ const Image: React.FC<ImageProps> = ({ data }) => {
   );
 };
 
-export default Image;
+export default React.memo(Image, (prevProps, nextProps) => {
+  return prevProps.data === nextProps.data;
+});

@@ -1,50 +1,61 @@
 import React, { useState, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 
-import { connectController, StructureBase } from './store';
+import { connectController, StructureBase, DataConfig } from './store';
 import { getErrorsStructureAndData, StructureError } from './errors';
+
 import theme from './themes';
 
-import { CoreProps, CoreState } from './interfaces';
+import { CoreProps } from './interfaces';
 
 const Core: React.FC<CoreProps> = ({ structure: structureStr, data: dataStr, store }) => {
-  const [state, setState] = useState<CoreState | null>(null);
-  const [errors, setErrors] = useState<StructureError[] | null>(null);
+  const [data, setData] = useState<DataConfig | null>(null);
 
+  const [, setErrors] = useState<StructureError[] | null>(null);
+  const [RootElement, setElements] = useState<React.ReactElement | null>(null);
+
+  // Parse Structure Once...
   useEffect(() => {
     try {
-      const parsedInfo = {
-        structure: JSON.parse(structureStr),
-        data: JSON.parse(dataStr),
-      };
+      const parsedStructure = JSON.parse(structureStr);
+      const structureAnalisys = store.validateStructure(parsedStructure);
+      if (structureAnalisys.length !== 0) {
+        setErrors(structureAnalisys);
 
-      const result = store.validateStructure(parsedInfo.structure);
-      if (result.length !== 0) {
-        setErrors(result);
+        const errorsDef = getErrorsStructureAndData(structureAnalisys);
+        setData({ data: errorsDef.data });
+
+        const elements = store.build(errorsDef.structure as StructureBase);
+        setElements(elements);
       } else {
-        setState(parsedInfo);
+        const elements = store.build(parsedStructure);
+        setElements(elements);
       }
     } catch (err) {
       console.log('Error: ');
       console.log(err);
     }
-  }, [structureStr, dataStr, store]);
+  }, [structureStr]);
 
-  if (errors) {
-    const errorsDef = getErrorsStructureAndData(errors);
-    return store.build(errorsDef.structure as StructureBase, {
-      data: errorsDef.data,
-    });
-  }
+  // Parse Data Change each time...
+  useEffect(() => {
+    try {
+      const parsedData = JSON.parse(dataStr);
+      setData(parsedData);
+    } catch (err) {
+      console.log('Error: ');
+      console.log(err);
+    }
+  }, [dataStr]);
 
-  if (!state) {
+  if (!RootElement) {
     return null;
   }
 
   return (
     <>
       <theme.global />
-      <ThemeProvider theme={theme}>{store.build(state.structure, state.data)}</ThemeProvider>;
+      <ThemeProvider theme={theme}>{store.appendDataToContainer(RootElement, data)}</ThemeProvider>
     </>
   );
 };
