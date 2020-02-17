@@ -21,8 +21,6 @@ const StyledText = (props: StyledTextProps) => {
 };
 
 const Text: React.FC<TextProps> = ({ structure, data }) => {
-  console.log(`Text ${structure.name}`);
-  console.log(data);
   return (
     <StyledText data-name={structure.name} typography={structure.typography}>
       {data}

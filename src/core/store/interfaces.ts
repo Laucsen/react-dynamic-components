@@ -8,15 +8,15 @@ export interface StructureAnalysis {
 
 // State related
 interface ComponentsIndex {
-  [index: string]: any;
+  [index: string]: any; // Any react compoment. Maybe it is possible to add React Types here.
 }
 
 interface StructuresIndex {
-  [index: string]: any;
+  [index: string]: any; // Each component has its structure.
 }
 
 interface DataSchemaIndex {
-  [index: string]: any;
+  [index: string]: any; // Each component has its own data.
 }
 
 export interface StructureBase {
@@ -34,15 +34,15 @@ interface GetChildrenIndex {
   [index: string]: GetChildren;
 }
 
-export interface Data {
-  [index: string]: any;
-}
-
 export interface State {
   components: ComponentsIndex;
   structuresSchemas: StructuresIndex;
   dataSchema: DataSchemaIndex;
   childrens: GetChildrenIndex;
+}
+
+export interface Data {
+  [index: string]: any; // Any because each component has a type...
 }
 
 export interface DataConfig {

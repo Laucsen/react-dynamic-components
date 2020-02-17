@@ -1,29 +1,29 @@
 {
-	"version": 1,
-	"name": "base-structure",
-	"title": "React Dynamic Components",
-	"background": {
-		"color": "#DDDDDD"
-	},
-	"root": {
-		"name": "main-grid",
-		"type": "Grid",
-		"background": {
-			"color": "#EEEEEE"
-		},
-		"items": [
-			[
-				{
-					"data": {
-						"mobile": 6,
-						"tablet": 12,
-						"desktop": 12,
-						"component": {
-							"type": "SheetsNavigation"
-						}
-					}
-				}
-			]
-		]
-	}
+  "version": 1,
+  "name": "base-structure",
+  "title": "React Dynamic Components",
+  "background": {
+    "color": "#DDDDDD"
+  },
+  "root": {
+    "name": "main-grid",
+    "type": "Grid",
+    "background": {
+      "color": "#EEEEEE"
+    },
+    "items": [
+      [
+        {
+          "data": {
+            "mobile": 6,
+            "tablet": 12,
+            "desktop": 12,
+            "component": {
+              "type": "SheetsNavigation"
+            }
+          }
+        }
+      ]
+    ]
+  }
 }

@@ -1,10 +1,11 @@
 import React from 'react';
 
-import { StructureBase, useDefaultStyles } from '../..';
 import { ContainerProps } from './interfaces';
 import { ContainerStyled } from './styles';
 
 import { GradientContainer, ContentContainer } from '../../shared';
+import { StructureBase } from '../../core';
+import { useDefaultStyles } from '../../utils';
 
 const Container: React.FC<ContainerProps> = ({ store, structure, rootData }) => {
   const styles = useDefaultStyles(structure);

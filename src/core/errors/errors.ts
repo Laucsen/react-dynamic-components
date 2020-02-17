@@ -59,7 +59,7 @@ export const getErrorsStructureAndData = (errors: StructureError[]) => {
         },
         {
           type: 'Text',
-          name: `${error.name}- schemaPath`,
+          name: `${error.name}-schemaPath`,
         },
       ],
     );
@@ -72,7 +72,7 @@ export const getErrorsStructureAndData = (errors: StructureError[]) => {
   const data = errors.reduce((acc: Data, error: StructureError): Data => {
     acc[error.name] = error.message;
     acc[`${error.name}-component`] = error.component;
-    acc[`${error.name}- schemaPath`] = error.schemaPath;
+    acc[`${error.name}-schemaPath`] = error.schemaPath;
     return acc;
   }, {});
 

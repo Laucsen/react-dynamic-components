@@ -1,7 +1,7 @@
 import ImageSrc from './Image';
 import ImageStructure from './structure';
 
-import { register } from '../..';
+import { register } from '../../core';
 
 const Image = register('Image', ImageStructure)(ImageSrc);
 

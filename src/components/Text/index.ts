@@ -1,7 +1,7 @@
 import TextSrc from './Text';
 import TextStructure from './structure';
 
-import { register } from '../..';
+import { register } from '../../core';
 
 const Text = register('Text', TextStructure)(TextSrc);
 
