@@ -1,9 +1,17 @@
 {
-	"version": 1,
-	"data": {
-		"text-b": "Teste for area 1.2",
-		"text-c": "Teste for area 1.3",
-		"text-d": "Teste for area 1.4",
-		"title-image": "images/MageAwakeningLogo.png"
-	}
+  "version": 1,
+  "data": {
+    "text-b": "Teste for area 1.2",
+    "text-c": "Teste for area 1.3",
+    "text-d": "Teste for area 1.4",
+    "title-image": "images/MageAwakeningLogo.png",
+    "label-a": {
+      "title": "Name:",
+      "text": "Diego Laucsen da Rosa"
+    },
+    "label-b": {
+      "title": "Shadow Name:",
+      "text": "Shardik"
+    }
+  }
 }

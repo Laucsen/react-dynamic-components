@@ -1,97 +1,138 @@
 {
-	"version": 1,
-	"name": "mage-structure",
-	"title": "Mage Sheet Structure",
-	"root": {
-		"name": "mage-main-grid",
-		"type": "Grid",
-		"background": {
-			"image": "images/crystal-background.jpg",
-			"gradient": "c-4"
-		},
-		"items": [
-			[
-				{
-					"data": {
-						"mobile": 6,
-						"tablet": 12,
-						"desktop": 5,
-						"component": {
-							"type": "Container",
-							"background": {
-								"color": "c-2"
-							},
-							"components": [
-								{
-									"type": "Image",
-									"name": "title-image"
-								}
-							]
-						}
-					}
-				},
-				{
-					"data": {
-						"mobile": 6,
-						"tablet": 12,
-						"desktop": 5,
-						"component": {
-							"type": "Container",
-							"background": {
-								"color": "c-3"
-							},
-							"components": [
-								{
-									"type": "Text",
-									"name": "text-b",
-									"typography": "h3"
-								}
-							]
-						}
-					}
-				},
-				{
-					"data": {
-						"mobile": 6,
-						"tablet": 12,
-						"desktop": 2,
-						"component": {
-							"type": "Container",
-							"background": {
-								"color": "c-4"
-							},
-							"components": [
-								{
-									"type": "Text",
-									"name": "text-c",
-									"typography": "h6"
-								}
-							]
-						}
-					}
-				}
-			],
-			[
-				{
-					"data": {
-						"mobile": 12,
-						"tablet": 12,
-						"desktop": 12,
-						"component": {
-							"type": "Container",
-							"background": {
-								"color": "c-5"
-							},
-							"components": [
-								{
-									"type": "Text",
-									"name": "text-d"
-								}
-							]
-						}
-					}
-				}
-			]
-		]
-	}
+  "version": 1,
+  "name": "mage-structure",
+  "title": "Mage Sheet Structure",
+  "root": {
+    "name": "mage-main-grid",
+    "type": "Grid",
+    "background": {
+      "image": "images/crystal-background.jpg",
+      "gradient": "c-4"
+    },
+    "items": [
+      [
+        {
+          "data": {
+            "mobile": 6,
+            "tablet": 12,
+            "desktop": 5,
+            "component": {
+              "type": "Container",
+              "background": {
+                "color": "c-2"
+              },
+              "components": [
+                {
+                  "type": "Image",
+                  "name": "title-image"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "data": {
+            "mobile": 6,
+            "tablet": 12,
+            "desktop": 5,
+            "component": {
+              "type": "Container",
+              "background": {
+                "color": "c-3"
+              },
+              "components": [
+                {
+                  "type": "Text",
+                  "name": "text-b",
+                  "typography": "h3"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "data": {
+            "mobile": 6,
+            "tablet": 12,
+            "desktop": 2,
+            "component": {
+              "type": "Container",
+              "background": {
+                "color": "c-4"
+              },
+              "components": [
+                {
+                  "type": "Text",
+                  "name": "text-c",
+                  "typography": "h6"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      [
+        {
+          "data": {
+            "mobile": 12,
+            "tablet": 12,
+            "desktop": 12,
+            "component": {
+              "type": "Container",
+              "background": {
+                "color": "c-5"
+              },
+              "components": [
+                {
+                  "type": "Text",
+                  "name": "text-d"
+                }
+              ]
+            }
+          }
+        }
+      ],
+      [
+        {
+          "data": {
+            "mobile": 6,
+            "tablet": 12,
+            "desktop": 6,
+            "component": {
+              "type": "Container",
+              "background": {
+                "color": "c-1"
+              },
+              "components": [
+                {
+                  "type": "Label",
+                  "name": "label-a"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "data": {
+            "mobile": 6,
+            "tablet": 12,
+            "desktop": 6,
+            "component": {
+              "type": "Container",
+              "background": {
+                "color": "c-1"
+              },
+              "components": [
+                {
+                  "type": "Label",
+                  "name": "label-b",
+                  "inline": true
+                }
+              ]
+            }
+          }
+        }
+      ]
+    ]
+  }
 }

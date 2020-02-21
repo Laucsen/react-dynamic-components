@@ -6,6 +6,7 @@ import { Grid, Row, Column } from './components/Grid';
 import { Container } from './components/Container';
 import { Text } from './components/Text';
 import { Image } from './components/Image';
+import { Label } from './components/Label';
 
 export {
   // Core
@@ -27,4 +28,5 @@ export {
   Container,
   Text,
   Image,
+  Label,
 };
